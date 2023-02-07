@@ -21,23 +21,101 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
     />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <!-- my style -->
     <link rel="stylesheet" href="./style.css" />
     <title>Marvel Hero Search</title>
   </head>
   <body>
-    <header class="container-fluid jumbotron">
-      <h1 class="h1">Marvel Hero Search</h1>
+    <header class="container-fluid">
+      <h2 class="container-md">Marvel Hero Search</h2>
     </header>
 
     <div class="container-md">
       <div class="row">
         <main class="col-lg-9 pb-3">
-          <section class="">SEARCH</section>
+          <section>
+            <form id="search-form" class="form">
+              <div class="form-group">
+                <div class="mb-3">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for a Hero"
+                    aria-labelledby="form-heading"
+                    aria-controls="today forecast"
+                  />
+                  <div class="search-btn">
+                    <button
+                      type="submit"
+                      class="btn btn-advance"
+                      id="advanceBtn"
+                      aria-label="submit search"
+                    >
+                      <i class="bi bi-grid"></i>Advance
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-search"
+                      id="searchBtn"
+                      aria-label="submit search"
+                    >
+                      <i class="bi bi-search"></i>Search
+                    </button>
+                  </div>
+                </div>
+
+                <div class="search-options hide">
+                  <div class="mb-3">
+                    <label for="startYearInput" class="form-label"
+                      >Release Date
+                    </label>
+                    <input
+                      type="year"
+                      class="form-control f-optional"
+                      id="startYearInput"
+                      placeholder="2023"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="seriesInput" class="form-label">Series </label>
+                    <input
+                      type="text"
+                      class="form-control f-optional"
+                      id="seriesInput"
+                      placeholder="Avengers"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="creatorInput" class="form-label">Creator</label>
+                    <input
+                      type="text"
+                      class="form-control f-optional"
+                      id="creatorInput"
+                      placeholder="Aaron"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
           <section class="">COMICS</section>
           <section class="">MOVIES</section>
         </main>
-        <aside class="col-md-3 pb-3">ASIDE</aside>
+        <aside class="col-md-3 pb-3 ml-3">
+          <h4>Your search list</h4>
+        </aside>
       </div>
     </div>
 
