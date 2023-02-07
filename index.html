@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
     />
     <!-- my style -->
@@ -35,93 +35,153 @@
   </head>
   <body>
     <header class="container-fluid">
-      <h2 class="container-md">Marvel Hero Search</h2>
+      <h1 class="container-md">Marvel Hero Search</h1>
     </header>
 
     <div class="container-md">
-      <div class="row">
-        <main class="col-lg-9 pb-3">
-          <section>
-            <form id="search-form" class="form">
-              <div class="form-group">
-                <div class="mb-3">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for a Hero"
-                    aria-labelledby="form-heading"
-                    aria-controls="today forecast"
-                  />
-                  <div class="search-btn">
-                    <button
-                      type="submit"
-                      class="btn btn-advance"
-                      id="advanceBtn"
-                      aria-label="submit search"
-                    >
-                      <i class="bi bi-grid"></i>Advance
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-search"
-                      id="searchBtn"
-                      aria-label="submit search"
-                    >
-                      <i class="bi bi-search"></i>Search
-                    </button>
-                  </div>
-                </div>
-
-                <div class="search-options hide">
-                  <div class="mb-3">
-                    <label for="startYearInput" class="form-label"
-                      >Release Date
-                    </label>
-                    <input
-                      type="year"
-                      class="form-control f-optional"
-                      id="startYearInput"
-                      placeholder="2023"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="seriesInput" class="form-label">Series </label>
-                    <input
-                      type="text"
-                      class="form-control f-optional"
-                      id="seriesInput"
-                      placeholder="Avengers"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="creatorInput" class="form-label">Creator</label>
-                    <input
-                      type="text"
-                      class="form-control f-optional"
-                      id="creatorInput"
-                      placeholder="Aaron"
-                    />
-                  </div>
-                </div>
+      <div class="row mg-top">
+        <form id="search-form" class="form col-lg-9">
+          <div class="form-group">
+            <div class="mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="searchInput"
+                placeholder="Search for a Hero"
+                aria-labelledby="form-heading"
+                aria-controls="today forecast"
+              />
+              <div class="search-btn">
+                <button
+                  type="submit"
+                  class="btn btn-advance"
+                  id="advanceBtn"
+                  aria-label="submit search"
+                >
+                  <i class="bi bi-grid"></i>Advance
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-search"
+                  id="searchBtn"
+                  aria-label="submit search"
+                >
+                  <i class="bi bi-search"></i>Search
+                </button>
               </div>
-            </form>
-          </section>
+            </div>
 
-          <section class="">COMICS</section>
-          <section class="">MOVIES</section>
-        </main>
-        <aside class="col-md-3 pb-3 ml-3">
-          <h4>Your search list</h4>
+            <div class="search-options hide">
+              <div class="mb-3">
+                <label for="startYearInput" class="form-label"
+                  >Release Date
+                </label>
+                <input
+                  type="year"
+                  class="form-optional"
+                  id="startYearInput"
+                  placeholder="2023"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="seriesInput" class="form-label">Series </label>
+                <input
+                  type="text"
+                  class="form-optional"
+                  id="seriesInput"
+                  placeholder="Avengers"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="creatorInput" class="form-label">Creator</label>
+                <input
+                  type="text"
+                  class="form-optional"
+                  id="creatorInput"
+                  placeholder="Aaron"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <aside class="col-lg-3 aside">
+          <h4>Your search list:</h4>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur
+            sapiente eaque quisquam incidunt, tempore facilis quas. Nisi beatae
+            explicabo odit eos ipsa, dolorum vitae. Quisquam delectus illo sed
+            officia velit.
+          </p>
         </aside>
       </div>
+      <section class="row">
+        <h2>Trending in the Universe</h2>
+        <div class="row row-card">
+          <div class="col-md">
+            <h3>Comics</h3>
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="" class="btn btn-card">visit</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <h3>Character</h3>
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="" class="btn btn-card">visit</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <h3>Movie</h3>
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="" class="btn btn-card">visit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="row hide"></section>
     </div>
 
     <footer class="footer container-md">
       Copyright &copy;<span class="year">2023</span> by Fantastic4. All right
-      reserved.
+      Reserved.
     </footer>
 
     <!-- jQuery -->
