@@ -50,6 +50,35 @@ $("#searchBtn").on("click", function (event) {
     });
   });
 
+  let marvelcharacter = $("#searchInput")
+let superqueryURL = "https://www.superheroapi.com/api/9055872414486600/"
+//gets a character id 
+$.ajax({
+  url: superqueryURL + "search/" + marvelcharacter,
+  method: "GET"
+})
+  .then(function(nameid) {
+    let id = nameid
+    //uses id to get character info 
+    $.ajax({
+      url: superqueryURL + id,
+      method: "Get"
+    })
+    .then(function(response){
+      console.log(response);
+      let div = $("<div>");
+      let img = $("<img>");
+      let h4 = $("<h4>");
+      let p = $("<p>");
+
+      //name= results.biography.full-name, 
+      //first appearance= results.biography.first-appearance, 
+      //nickname= results.name, 
+      //alignment= results.biograpghy.alignment, 
+      //group affiliation = results.connections.group-affiliation  
+      //img = results.image.url 
+    })
+  }) 
 
 
 
