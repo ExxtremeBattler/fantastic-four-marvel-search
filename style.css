@@ -64,6 +64,7 @@ h2 {
 h3 {
   font-size: 1.6rem;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 h4 {
@@ -187,6 +188,46 @@ section {
 
 .btn-card {
   background-color: var(--tint);
+}
+
+/* SEARCH RESULT -------------------------------------------------- */
+.bio {
+  background: linear-gradient(to top, var(--main), var(--shade));
+  padding: 0;
+  margin: 0;
+}
+
+.bio-img {
+  height: 24rem;
+  margin-top: 1.2rem;
+  box-shadow: 8px 8px 4px 0 var(--main);
+}
+
+.bio-type {
+  margin-top: 1.6rem;
+  font-size: 1rem;
+  font-weight: 100;
+  color: var(--accent-variant);
+}
+
+.bio-results {
+  margin-top: -0.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+/* carousel */
+.carousel-inner {
+  margin-top: 1.2rem;
+}
+
+.carousel-control {
+  margin-top: 16rem;
+}
+
+.carousel-img {
+  height: 32rem;
+  object-fit: cover;
 }
 
 /* FOOTER -------------------------------------------------- */
