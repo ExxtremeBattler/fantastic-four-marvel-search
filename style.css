@@ -18,7 +18,7 @@
   --accent: #e3874f;
   --accent-variant: #886a4a;
   --tint: #707070;
-  --white: #fff;
+  --white: #f8f9fa;
 }
 
 body {
@@ -27,10 +27,6 @@ body {
   line-height: 1;
   background-color: var(--main);
   color: var(--white);
-}
-
-.container-md {
-  margin-bottom: 2.4rem;
 }
 
 .container-fluid {
@@ -44,6 +40,7 @@ h2,
 h3,
 h4 {
   font-family: "Ubuntu", sans-serif;
+  text-align: center;
 }
 
 h1 {
@@ -51,17 +48,19 @@ h1 {
   font-weight: 800;
   padding: 1.6rem 0;
   letter-spacing: 2px;
+  text-align: left;
 }
 
 h2 {
   font-size: 2rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  border-top: 1px solid var(--tint);
-  padding-top: 2.4rem;
+  color: var(--white);
 }
 
 h3 {
+  color: var(--white);
   font-size: 1.6rem;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -72,20 +71,21 @@ h4 {
 }
 
 .mg-top {
-  margin-top: 4.8rem;
-}
-
-section {
-  padding: 8rem 0 0 0;
+  margin-top: 6.4rem;
 }
 
 /*  SEARCH FORM -------------------------------------------------- */
+.jumbo {
+  background-color: var(--shade);
+  margin-bottom: 4.8rem;
+  padding: 4.8rem 0;
+}
 
 .form-control {
-  background-color: var(--main);
+  background-color: var(--shade);
   border: none;
   border-radius: none;
-  border-bottom: 1px solid var(--tint);
+  border-bottom: 4px solid var(--main);
   font-size: 2.4rem;
   line-height: 3.2;
   padding: 1rem;
@@ -114,7 +114,7 @@ section {
 }
 
 .btn-advance {
-  background-color: var(--shade);
+  background-color: var(--main);
   flex: 40%;
 }
 
@@ -134,12 +134,13 @@ section {
 }
 
 .form-label {
-  color: var(--tint);
+  color: var(--white);
   text-transform: uppercase;
 }
 .form-optional {
-  background-color: var(--main);
-  border: 1px solid var(--tint);
+  background-color: var(--shade);
+  border: 1px solid var(--white);
+  border-radius: 4px;
   font-size: 1.2rem;
   padding: 0.4rem;
   width: 100%;
@@ -155,11 +156,7 @@ section {
   padding-left: 1.8rem;
 }
 
-/* COMICS SECTION -------------------------------------------------- */
-.row-card {
-  padding: 0;
-  margin: 0;
-}
+/* TRENDING SECTION -------------------------------------------------- */
 
 .row-card h3 {
   margin-top: 3.2rem;
@@ -191,23 +188,33 @@ section {
 }
 
 /* SEARCH RESULT -------------------------------------------------- */
-.bio {
-  background: linear-gradient(to top, var(--main), var(--shade));
-  padding: 0;
-  margin: 0;
+
+.hero-section {
+  margin: 8rem -2rem 6.4rem 0;
+}
+
+.hero-bio {
+  padding: 3.2rem;
+}
+
+.bioBlock-img {
 }
 
 .bio-img {
-  height: 24rem;
-  margin-top: 1.2rem;
-  box-shadow: 8px 8px 4px 0 var(--main);
+  height: 30rem;
+  width: 30rem;
+  border: 12px solid var(--shade);
 }
 
 .bio-type {
-  margin-top: 1.6rem;
+  margin-top: 2rem;
   font-size: 1rem;
   font-weight: 100;
   color: var(--accent-variant);
+}
+
+.bio-type:first-child {
+  margin-top: 0;
 }
 
 .bio-results {
@@ -226,7 +233,7 @@ section {
 }
 
 .carousel-img {
-  height: 32rem;
+  height: 24rem;
   object-fit: cover;
 }
 
