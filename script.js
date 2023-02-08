@@ -26,12 +26,15 @@ $("#searchBtn").on("click", function (event) {
     url: marvelIdURL,
     method: "GET"
   }).then(function(response){
+  
 
     var characterId = response.data.results[0].id
     console.log (characterId)
+    
+    console.log(response.data.results[0].comics)
       
 
-    let marvelComicURL = "https://gateway.marvel.com:443/v1/public/characters/" + characterId + "/comics?&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b"
+    let marvelComicURL = "https://gateway.marvel.com:443/v1/public/characters/" + characterId + "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b"
 
    
 
