@@ -46,33 +46,31 @@ $(document).ready(function () {
   });
 });
 
-//
-// let marvelcharacter = $("#searchInput");
-let marvelcharacter = "hulk";
+let hero = {
+  name:"",
+  appaerance:"",
+  firstname:"",
+  alignment:"",
+  group:"",
+  img:"",
+}
+$("#searchBtn").on("click", function (event) {
+  event.preventDefault();
+// let marvelcharacter = $("#searchInput").val;
+let marvelcharacter = $("#searchInput").val();
 let superqueryURL =
   "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
 //gets a character id
 $.ajax({
   url: superqueryURL + "search/" + marvelcharacter,
   method: "GET",
-}).then(function (nameid) {
-  let id = nameid;
-  //uses id to get character info
-  $.ajax({
-    url: superqueryURL + id,
-    method: "Get",
-  }).then(function (response) {
-    console.log(response);
-    let div = $("<div>");
-    let img = $("<img>");
-    let h4 = $("<h4>");
-    let p = $("<p>");
-
-    //name= results.biography.full-name,
-    //first appearance= results.biography.first-appearance,
-    //nickname= results.name,
-    //alignment= results.biograpghy.alignment,
-    //group affiliation = results.connections.group-affiliation
-    //img = results.image.url
-  });
-});
+}).then(function (response) {
+  console.log(response)
+  hero.name = response.results[0].name;
+  hero.appaerance = response.results[0].biography["first-appearance"];
+  hero.firstname = response.results[0].biography["full-name"];
+  hero.alignment = response.results[0].biograpghy.alignment;
+  hero.group = response.results[0].connections["group-affiliation"];
+  hero.img = response.results[0].image.url;    
+  })
+})
