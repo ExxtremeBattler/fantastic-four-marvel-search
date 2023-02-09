@@ -1,12 +1,15 @@
+// SEARCH
+// advance search options onclick handler
+$("#advanceBtn").on("click", function (event) {
+  event.preventDefault();
+  $(".search-options").removeClass("hide");
+});
+//
+//
+//
+
 $(document).ready(function () {
   //makes sure html & css load before running the JS
-
-  // SEARCH
-  // advance search options onclick handler
-  $("#advanceBtn").on("click", function (event) {
-    event.preventDefault();
-    $(".search-options").removeClass("hide");
-  });
 
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {
@@ -57,22 +60,24 @@ $.ajax({
   method: "GET",
 }).then(function (nameid) {
   let id = nameid;
-  //uses id to get character info
-  $.ajax({
-    url: superqueryURL + id,
-    method: "Get",
-  }).then(function (response) {
-    console.log(response);
-    let div = $("<div>");
-    let img = $("<img>");
-    let h4 = $("<h4>");
-    let p = $("<p>");
 
-    //name= results.biography.full-name,
-    //first appearance= results.biography.first-appearance,
-    //nickname= results.name,
-    //alignment= results.biograpghy.alignment,
-    //group affiliation = results.connections.group-affiliation
-    //img = results.image.url
-  });
+  console.log(nameid);
+  //uses id to get character info
+  // $.ajax({
+  //   url: superqueryURL + id,
+  //   method: "Get",
+  // }).then(function (response) {
+  //   console.log(response);
+  //   let div = $("<div>");
+  //   let img = $("<img>");
+  //   let h4 = $("<h4>");
+  //   let p = $("<p>");
+
+  //name= results.biography.full-name,
+  //first appearance= results.biography.first-appearance,
+  //nickname= results.name,
+  //alignment= results.biograpghy.alignment,
+  //group affiliation = results.connections.group-affiliation
+  //img = results.image.url
+  // });
 });
