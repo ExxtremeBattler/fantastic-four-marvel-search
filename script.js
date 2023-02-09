@@ -48,7 +48,7 @@ $(document).ready(function () {
 
 let hero = {
   name:"",
-  appaerance:"",
+  appearance:"",
   firstname:"",
   alignment:"",
   group:"",
@@ -66,11 +66,21 @@ $.ajax({
   method: "GET",
 }).then(function (response) {
   console.log(response)
+
   hero.name = response.results[0].name;
-  hero.appaerance = response.results[0].biography["first-appearance"];
+  hero.appearance = response.results[0].biography["first-appearance"];
   hero.firstname = response.results[0].biography["full-name"];
-  hero.alignment = response.results[0].biograpghy.alignment;
+  hero.alignment = response.results[0].biography.alignment;
   hero.group = response.results[0].connections["group-affiliation"];
   hero.img = response.results[0].image.url;    
   })
+
+  $("#hero-name").text(hero.name)
+  $("#bio-nickname").text(hero.name)
+  $("#bio-appearance").text(hero.appearance)
+  $("#bio-firstname").text(hero.firstname)
+  $("#bio-alignment").text(hero.alignment)
+  $("#bio-group").text(hero.group)
+  $("#bio-img").attr("src", "hero.img")
+
 })
