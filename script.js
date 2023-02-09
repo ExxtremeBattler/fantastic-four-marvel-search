@@ -1,15 +1,76 @@
-// SEARCH
-// advance search options onclick handler
-$("#advanceBtn").on("click", function (event) {
-  event.preventDefault();
-  $(".search-options").removeClass("hide");
-});
-//
-//
-//
+// TRENDING IN THE UNIVERSE
+function get_random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+function generateRandomLetter() {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  return alphabet[Math.floor(Math.random() * alphabet.length)];
+}
+
+function trendingUniverse() {
+  let startWith = generateRandomLetter();
+
+  const marvelHeroURL =
+    "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
+    startWith +
+    "&limit=99&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+  $.ajax({
+    url: marvelHeroURL,
+    method: "GET",
+  }).then(function (response) {
+    const allHeros = response.data.results;
+    const randomHero = get_random(allHeros);
+    console.log(randomHero);
+
+    const randomHeroData = {
+      name: randomHero.name,
+      series: randomHero.series.items[0].name,
+      img: randomHero.thumbnail.path,
+    };
+
+    $("#card-hero-img").attr("src", randomHeroData.img + ".jpg");
+    $("#card-hero-title").text(randomHeroData.name);
+    $("#card-hero-desc").text(`First appearance in ${randomHeroData.series}`);
+  });
+
+  startWith = generateRandomLetter();
+
+  const marvelComicURL =
+    "https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=" +
+    startWith +
+    "&limit=99&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+  $.ajax({
+    url: marvelComicURL,
+    method: "GET",
+  }).then(function (response) {
+    const allComics = response.data.results;
+    const randomComic = get_random(allComics);
+    console.log(randomComic);
+
+    const randomComicData = {
+      title: randomComic.title,
+      img: randomComic.images[0].path,
+    };
+
+    console.log(randomComicData.series);
+
+    $("#card-comic-img").attr("src", randomComicData.img + ".jpg");
+    $("#card-comic-title").text(randomComicData.title);
+  });
+}
+
+trendingUniverse();
 
 $(document).ready(function () {
   //makes sure html & css load before running the JS
+  // SEARCH
+  // advance search options onclick handler
+  $("#advanceBtn").on("click", function (event) {
+    event.preventDefault();
+    $(".search-options").removeClass("hide");
+  });
 
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {
