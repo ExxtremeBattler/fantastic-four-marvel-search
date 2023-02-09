@@ -39,7 +39,7 @@ historyButtons.forEach(element => {
   $("#"+element[0].id).on("click", function (event) {
     event.preventDefault();
 
-    let searchInput = $("#searchInput").val();
+    let searchInput = event.target.innerHTML
     let marvelIdURL =
       "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
       searchInput +
