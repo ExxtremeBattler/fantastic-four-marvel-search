@@ -8,6 +8,40 @@ $(document).ready(function () {
     $(".search-options").removeClass("hide");
   });
 
+
+  // function to load last 5 searches in local storage
+  let searchesList = $("#searches-list")
+  let searchButton1 = $("#button1")
+  let searchButton2 = $("#button2")
+  let searchButton3 = $("#button3")
+  let searchButton4 = $("#button4")
+  let searchButton5 = $("#button5")
+
+  function loadHistory() {
+
+    searchButton1[0].innerHTML = localStorage.getItem("marvelSearch1")
+    searchButton2[0].innerHTML = localStorage.getItem("marvelSearch2")
+    searchButton3[0].innerHTML = localStorage.getItem("marvelSearch3")
+    searchButton4[0].innerHTML = localStorage.getItem("marvelSearch4")
+    searchButton5[0].innerHTML = localStorage.getItem("marvelSearch5")
+
+  }
+    
+loadHistory()
+
+// function to save search to local storage
+var count = 0; 
+function saveHistory(item) {
+  
+  if (count > 4){
+    count = 0
+  }
+  console.log(count)
+  count++
+  localStorage.setItem("marvelSearch" +count, item)
+
+};
+
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
@@ -16,6 +50,10 @@ $(document).ready(function () {
       "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
       searchInput +
       "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+    // saves search in localStorage, and refresh the history
+    saveHistory(searchInput);
+    loadHistory()
 
     // first ajax to turn the hero name in searchInput into an Id the API can use
     $.ajax({
@@ -44,7 +82,7 @@ $(document).ready(function () {
       });
     });
   });
-});
+
 
 //
 // let marvelcharacter = $("#searchInput");
@@ -75,4 +113,4 @@ $.ajax({
     //group affiliation = results.connections.group-affiliation
     //img = results.image.url
   });
-});
+})});
