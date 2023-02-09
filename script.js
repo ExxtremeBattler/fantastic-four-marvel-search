@@ -10,24 +10,34 @@ $(document).ready(function () {
 
 
   // function to load last 5 searches in local storage
-  let searchesList = $("#searches-list")
-  let searchButton1 = $("#button1")
-  let searchButton2 = $("#button2")
-  let searchButton3 = $("#button3")
-  let searchButton4 = $("#button4")
-  let searchButton5 = $("#button5")
+  let historyButton1 = $("#button1")
+  let historyButton2 = $("#button2")
+  let historyButton3 = $("#button3")
+  let historyButton4 = $("#button4")
+  let historyButton5 = $("#button5")
 
   function loadHistory() {
 
-    searchButton1[0].innerHTML = localStorage.getItem("marvelSearch1")
-    searchButton2[0].innerHTML = localStorage.getItem("marvelSearch2")
-    searchButton3[0].innerHTML = localStorage.getItem("marvelSearch3")
-    searchButton4[0].innerHTML = localStorage.getItem("marvelSearch4")
-    searchButton5[0].innerHTML = localStorage.getItem("marvelSearch5")
+    historyButton1[0].innerHTML = localStorage.getItem("marvelSearch1")
+    historyButton2[0].innerHTML = localStorage.getItem("marvelSearch2")
+    historyButton3[0].innerHTML = localStorage.getItem("marvelSearch3")
+    historyButton4[0].innerHTML = localStorage.getItem("marvelSearch4")
+    historyButton5[0].innerHTML = localStorage.getItem("marvelSearch5")
 
   }
-    
+
+// displays last 5 searches as soon as page is loaded
 loadHistory()
+
+// add on-click  function for history buttons to bring up relevant info whenever they're clicked
+
+let historyButtons = [historyButton1, historyButton2, historyButton3, historyButton4, historyButton5]
+historyButtons.forEach(element => {
+
+  
+});
+
+
 
 // function to save search to local storage
 var count = 0; 
