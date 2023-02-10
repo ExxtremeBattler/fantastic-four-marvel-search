@@ -87,5 +87,4 @@ $.ajax({
   $("#bio-group").text(hero.group)
   $("#bio-img").attr("src", hero.img)
   
-
 })
