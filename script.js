@@ -25,7 +25,10 @@ function trendingUniverse() {
 
     const randomHeroData = {
       name: randomHero.name,
-      series: randomHero.series.items[0].name,
+      series:
+        randomHero.series.items.length > 0
+          ? randomHero.series.items[0].name
+          : "NOT AVAILABLE",
       img: randomHero.thumbnail.path,
     };
 
@@ -51,7 +54,7 @@ function trendingUniverse() {
 
     const randomComicData = {
       title: randomComic.title,
-      img: randomComic.images[0].path,
+      img: randomComic.thumbnail.path,
     };
 
     console.log(randomComicData.series);
