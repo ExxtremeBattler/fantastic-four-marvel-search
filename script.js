@@ -1,5 +1,16 @@
+// SEARCH
+// advance search options onclick handler
+$("#advanceBtn").on("click", function (event) {
+  event.preventDefault();
+  $(".search-options").removeClass("hide");
+});
+//
+//
+//
+
 $(document).ready(function () {
   //makes sure html & css load before running the JS
+
 
   // SEARCH
   // advance search options onclick handler
@@ -37,6 +48,10 @@ let historyButtons = [historyButton1, historyButton2, historyButton3, historyBut
 historyButtons.forEach(element => {
 
   $("#"+element[0].id).on("click", function (event) {
+
+  // starting the onClick function for 'Search'
+  $("#searchBtn").on("click", function (event) {
+
     event.preventDefault();
 
     let searchInput = event.target.innerHTML
@@ -146,16 +161,7 @@ $.ajax({
   method: "GET",
 }).then(function (nameid) {
   let id = nameid;
-  //uses id to get character info
-  $.ajax({
-    url: superqueryURL + id,
-    method: "Get",
-  }).then(function (response) {
-    console.log(response);
-    let div = $("<div>");
-    let img = $("<img>");
-    let h4 = $("<h4>");
-    let p = $("<p>");
+
 
     //name= results.biography.full-name,
     //first appearance= results.biography.first-appearance,
@@ -165,3 +171,24 @@ $.ajax({
     //img = results.image.url
   });
 })});
+
+  console.log(nameid);
+  //uses id to get character info
+  // $.ajax({
+  //   url: superqueryURL + id,
+  //   method: "Get",
+  // }).then(function (response) {
+  //   console.log(response);
+  //   let div = $("<div>");
+  //   let img = $("<img>");
+  //   let h4 = $("<h4>");
+  //   let p = $("<p>");
+
+  //name= results.biography.full-name,
+  //first appearance= results.biography.first-appearance,
+  //nickname= results.name,
+  //alignment= results.biograpghy.alignment,
+  //group affiliation = results.connections.group-affiliation
+  //img = results.image.url
+  // });
+});
