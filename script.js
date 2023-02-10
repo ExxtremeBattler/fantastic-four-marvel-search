@@ -49,35 +49,43 @@ $(document).ready(function () {
   });
 });
 
-//
-// let marvelcharacter = $("#searchInput");
-let marvelcharacter = "hulk";
+let hero = {
+  name:"",
+  appearance:"",
+  firstname:"",
+  alignment:"",
+  group:"",
+  img:"",
+}
+$("#searchBtn").on("click", function (event) {
+  event.preventDefault();
+// let marvelcharacter = $("#searchInput").val;
+let marvelcharacter = $("#searchInput").val();
 let superqueryURL =
   "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
 //gets a character id
 $.ajax({
   url: superqueryURL + "search/" + marvelcharacter,
   method: "GET",
-}).then(function (nameid) {
-  let id = nameid;
+}).then(function (response) {
+  console.log(response)
+  console.log(response.results[0].image.url)
 
-  console.log(nameid);
-  //uses id to get character info
-  // $.ajax({
-  //   url: superqueryURL + id,
-  //   method: "Get",
-  // }).then(function (response) {
-  //   console.log(response);
-  //   let div = $("<div>");
-  //   let img = $("<img>");
-  //   let h4 = $("<h4>");
-  //   let p = $("<p>");
+  hero.name = response.results[0].name;
+  hero.appearance = response.results[0].biography["first-appearance"];
+  hero.firstname = response.results[0].biography["full-name"];
+  hero.alignment = response.results[0].biography.alignment;
+  hero.group = response.results[0].connections["group-affiliation"];
+  hero.img = response.results[0].image.url;    
+  })
 
-  //name= results.biography.full-name,
-  //first appearance= results.biography.first-appearance,
-  //nickname= results.name,
-  //alignment= results.biograpghy.alignment,
-  //group affiliation = results.connections.group-affiliation
-  //img = results.image.url
-  // });
-});
+  $("#hero-name").text(hero.name)
+  $("#bio-nickname").text(hero.name)
+  $("#bio-appearance").text(hero.appearance)
+  $("#bio-firstname").text(hero.firstname)
+  $("#bio-alignment").text(hero.alignment)
+  $("#bio-group").text(hero.group)
+  $("#bio-img").attr("src", hero.img)
+  
+
+})
