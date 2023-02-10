@@ -66,6 +66,7 @@ $.ajax({
   method: "GET",
 }).then(function (response) {
   console.log(response)
+  console.log(response.results[0].image.url)
 
   hero.name = response.results[0].name;
   hero.appearance = response.results[0].biography["first-appearance"];
@@ -81,6 +82,7 @@ $.ajax({
   $("#bio-firstname").text(hero.firstname)
   $("#bio-alignment").text(hero.alignment)
   $("#bio-group").text(hero.group)
-  $("#bio-img").attr("src", "hero.img")
+  $("#bio-img").attr("src", hero.img)
+  
 
 })
