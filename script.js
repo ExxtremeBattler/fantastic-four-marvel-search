@@ -1,12 +1,15 @@
+// SEARCH
+// advance search options onclick handler
+$("#advanceBtn").on("click", function (event) {
+  event.preventDefault();
+  $(".search-options").removeClass("hide");
+});
+//
+//
+//
+
 $(document).ready(function () {
   //makes sure html & css load before running the JS
-
-  // SEARCH
-  // advance search options onclick handler
-  $("#advanceBtn").on("click", function (event) {
-    event.preventDefault();
-    $(".search-options").removeClass("hide");
-  });
 
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {

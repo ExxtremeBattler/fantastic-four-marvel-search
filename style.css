@@ -40,7 +40,6 @@ h2,
 h3,
 h4 {
   font-family: "Ubuntu", sans-serif;
-  text-align: center;
 }
 
 h1 {
@@ -48,11 +47,10 @@ h1 {
   font-weight: 800;
   padding: 1.6rem 0;
   letter-spacing: 2px;
-  text-align: left;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 3.2rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -78,7 +76,7 @@ h4 {
 .jumbo {
   background-color: var(--shade);
   margin-bottom: 4.8rem;
-  padding: 4.8rem 0;
+  padding: 6.4rem 0;
 }
 
 .form-control {
@@ -107,6 +105,7 @@ h4 {
   background-color: var(--accent);
   margin-top: 0.8rem;
   width: 100%;
+  margin-bottom: 1.6rem;
 }
 
 .btn i {
@@ -131,6 +130,7 @@ h4 {
   align-items: stretch;
   gap: 1rem;
   margin-top: 3.2rem;
+  margin-bottom: 1.6rem;
 }
 
 .form-label {
@@ -145,10 +145,6 @@ h4 {
   padding: 0.4rem;
   width: 100%;
   margin: 0;
-}
-
-.hide {
-  display: none;
 }
 
 /* aside */
@@ -190,20 +186,20 @@ h4 {
 /* SEARCH RESULT -------------------------------------------------- */
 
 .hero-section {
-  margin: 8rem -2rem 6.4rem 0;
+  margin-top: 8rem;
+  margin-bottom: 6.4rem;
+  margin-right: 0;
 }
 
 .hero-bio {
-  padding: 3.2rem;
-}
-
-.bioBlock-img {
+  padding-bottom: 3.2rem;
 }
 
 .bio-img {
-  height: 30rem;
-  width: 30rem;
+  height: 60vh;
+  width: 100%;
   border: 12px solid var(--shade);
+  margin-bottom: 1.6rem;
 }
 
 .bio-type {
@@ -218,18 +214,19 @@ h4 {
 }
 
 .bio-results {
-  margin-top: -0.8rem;
   font-size: 1.6rem;
+  margin-top: -0.8rem;
   font-weight: 400;
+}
+
+.bio-results i {
+  margin: 0 0.4rem 0 1.6rem;
+  color: var(--white);
 }
 
 /* carousel */
 .carousel-inner {
-  margin-top: 1.2rem;
-}
-
-.carousel-control {
-  margin-top: 16rem;
+  /* margin-top: 1.2rem; */
 }
 
 .carousel-img {
@@ -245,4 +242,9 @@ h4 {
   padding: 1rem;
   text-align: center;
   color: var(--tint);
+}
+
+/* DISPLAY HIDDEN-------------------------------------------------- */
+.hide {
+  display: none;
 }
