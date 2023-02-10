@@ -43,72 +43,70 @@
     <section class="jumbo">
       <nav class="container-md">
         <div class="row">
-          <form id="search-form" class="form col-lg-9">
-            <div class="form-group">
-              <div class="mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  id="searchInput"
-                  placeholder="Search for a Hero"
-                  aria-labelledby="form-heading"
-                  aria-controls="today forecast"
-                />
-                <div class="search-btn">
-                  <button
-                    type="submit"
-                    class="btn btn-advance"
-                    id="advanceBtn"
-                    aria-label="submit search"
-                  >
-                    <i class="bi bi-grid"></i>Advance
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-search"
-                    id="searchBtn"
-                    aria-label="submit search"
-                  >
-                    <i class="bi bi-search"></i>Search
-                  </button>
-                </div>
-              </div>
-
-              <div class="search-options hide">
-                <div class="mb-3">
-                  <label for="startYearInput" class="form-label"
-                    >Release Date
-                  </label>
-                  <input
-                    type="year"
-                    class="form-optional"
-                    id="startYearInput"
-                    placeholder="2023"
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label for="seriesInput" class="form-label">Series </label>
-                  <input
-                    type="text"
-                    class="form-optional"
-                    id="seriesInput"
-                    placeholder="Avengers"
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label for="creatorInput" class="form-label">Creator</label>
-                  <input
-                    type="text"
-                    class="form-optional"
-                    id="creatorInput"
-                    placeholder="Aaron"
-                  />
-                </div>
+          <div id="search-form" class="col-lg-9">
+            <div class="mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="searchInput"
+                placeholder="Search for a Hero"
+                aria-labelledby="form-heading"
+                aria-controls="today forecast"
+              />
+              <div class="search-btn">
+                <button
+                  type="submit"
+                  class="btn btn-advance"
+                  id="advanceBtn"
+                  aria-label="submit search"
+                >
+                  <i class="bi bi-grid"></i>Advance
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-search"
+                  id="searchBtn"
+                  aria-label="submit search"
+                >
+                  <i class="bi bi-search"></i>Search
+                </button>
               </div>
             </div>
-          </form>
+
+            <div class="search-options hide">
+              <div class="mb-3">
+                <label for="startYearInput" class="form-label"
+                  >Release Date
+                </label>
+                <input
+                  type="year"
+                  class="form-optional"
+                  id="startYearInput"
+                  placeholder="2023"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="seriesInput" class="form-label">Series </label>
+                <input
+                  type="text"
+                  class="form-optional"
+                  id="seriesInput"
+                  placeholder="Avengers"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="creatorInput" class="form-label">Creator</label>
+                <input
+                  type="text"
+                  class="form-optional"
+                  id="creatorInput"
+                  placeholder="Aaron"
+                />
+              </div>
+            </div>
+          </div>
 
           <aside id="recent-searches" class="col-lg-3 aside">
             <h4>Your search list:</h4>
@@ -127,21 +125,21 @@
     <main class="container-md">
       <!-- LOADING PAGE -->
       <section id="trending" class="row mg-top">
-        <h2>Trending in the Universe</h2>
+        <h2>Explore in the Universe</h2>
         <div class="row row-card">
           <div class="col-md">
             <h3>Comics</h3>
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                id="card-comic-img"
                 class="card-img-top"
                 alt="..."
               />
               <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                <h4 id="card-comic-title" class="card-title">Card title</h4>
+                <p id="card-comic-desc class="card-text">
+                 
                 </p>
                 <a href="" class="btn btn-card">visit</a>
               </div>
@@ -152,15 +150,13 @@
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                id="card-hero-img"
                 class="card-img-top"
                 alt="..."
               />
               <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
+                <h4 id="card-hero-title" class="card-title"></h4>
+                <p id="card-hero-desc" class="card-text"></p>
                 <a href="" class="btn btn-card">visit</a>
               </div>
             </div>
@@ -174,10 +170,9 @@
                 alt="..."
               />
               <div class="card-body">
-                <h4 class="card-title">Card title</h4>
+                <h4 class="card-title"></h4>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  
                 </p>
                 <a href="" class="btn btn-card">visit</a>
               </div>
@@ -193,8 +188,9 @@
         >
           <div class="col-md-7">
             <img
-              src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+          
               class="card-img-top bio-img"
+              id="bio-img"
               alt="..."
             />
           </div>
@@ -205,17 +201,11 @@
               <i class="bi bi-caret-right-fill"></i>black widow
             </h5>
             <p class="bio-type">first appearance</p>
-            <h5 id="bio-nickname" class="bio-results">
-              <i class="bi bi-caret-right-fill"></i>black widow
-            </h5>
+            <h5 id="bio-appearance" class="bio-results">black widow</h5>
             <p class="bio-type">alignment</p>
-            <h5 id="bio-nickname" class="bio-results">
-              <i class="bi bi-caret-right-fill"></i>black widow
-            </h5>
+            <h5 id="bio-alignment" class="bio-results">black widow</h5>
             <p class="bio-type">group affiliation</p>
-            <h5 id="bio-nickname" class="bio-results">
-              <i class="bi bi-caret-right-fill"></i>black widow
-            </h5>
+            <h5 id="bio-group" class="bio-results">black widow</h5>
           </div>
         </div>
 
