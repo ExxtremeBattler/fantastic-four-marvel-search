@@ -72,6 +72,39 @@ $(document).ready(function () {
     $(".search-options").removeClass("hide");
   });
 
+  let searchesList = $("#searches-list")
+  let userSearches = []
+
+
+  function saveSearch(search) {
+
+    userSearches.unshift(search);
+    localStorage.setItem("marvelSearches", JSON.stringify(userSearches))
+      
+    if (userSearches.length > 5) {
+        userSearches.length = 5
+      } 
+      
+      searchesList.empty()
+      // creates search history section/ buttons
+
+      for (let i = 0; i < userSearches.length; i++) {
+        
+        var searchButton = $ ("<button>")
+        searchButton[0].innerHTML = userSearches[i]
+
+        searchButton.on("click", function(event){
+          
+        })
+        
+        let listItemWrapper = $("<li>")
+        listItemWrapper.append(searchButton)
+        searchesList.append(listItemWrapper)
+      }
+  }
+
+  
+
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
@@ -80,6 +113,8 @@ $(document).ready(function () {
       "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
       searchInput +
       "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+      saveSearch(searchInput)
 
     // first ajax to turn the hero name in searchInput into an Id the API can use
     $.ajax({
