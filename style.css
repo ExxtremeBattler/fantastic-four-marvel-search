@@ -76,7 +76,7 @@ h4 {
 .jumbo {
   background-color: var(--shade);
   margin-bottom: 4.8rem;
-  padding: 6.4rem 0;
+  padding: 6.4rem 0 4.8rem 0;
 }
 
 .form-control {
@@ -173,14 +173,22 @@ h4 {
 .card-body {
   background-color: var(--shade);
   margin-top: 0.4rem;
+  min-height: 12.8rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .card-text {
-  margin-top: 1.2rem;
 }
 
 .btn-card {
-  background-color: var(--tint);
+  font-weight: 400;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
 }
 
 /* SEARCH RESULT -------------------------------------------------- */
