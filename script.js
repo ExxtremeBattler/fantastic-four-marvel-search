@@ -234,6 +234,7 @@ $.ajax({
   console.log(response.results[0].image.url)
 
 
+
     //name= results.biography.full-name,
     //first appearance= results.biography.first-appearance,
     //nickname= results.name,
@@ -270,7 +271,7 @@ hero.name = response.results[0].name;
   hero.alignment = response.results[0].biography.alignment;
   hero.group = response.results[0].connections["group-affiliation"];
   hero.img = response.results[0].image.url;    
-  })
+  
 
   $("#hero-name").text(hero.name)
   $("#bio-nickname").text(hero.name)
@@ -281,5 +282,5 @@ hero.name = response.results[0].name;
   $("#bio-img").attr("src", hero.img)
   
 
-})
+
  
