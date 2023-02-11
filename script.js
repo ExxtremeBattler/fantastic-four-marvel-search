@@ -105,7 +105,14 @@ $(document).ready(function () {
     // logs all the relevant characters
     console.log(response.data.results);
 
+    // grabs advanced search parameters
+    let year = $("#startYearInput").val
+    let series = $("#seriesInput").val
+    let creator = $("#creatorInput").val
+
+ 
     // new URL to search for comics of the chosen character
+
     let marvelComicURL =
       "https://gateway.marvel.com:443/v1/public/characters/" +
       characterId +
