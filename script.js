@@ -79,9 +79,12 @@ $(document).ready(function () {
 
   function loadSearches (){
     
+    // loops through storedSearches and creates buttons, as well as event listener for getting info when clicked
     for (let i = 0; i < storedSearches.length; i++) {
 
       var searchButton = $ ("<button>")
+      searchButton.classList.addClass("btn","btn-card")
+
       searchButton[0].innerHTML = storedSearches[i]
 
       searchButton.on("click", function(event){
@@ -135,6 +138,7 @@ $(document).ready(function () {
 
   function saveSearch(search) {
 
+    // if search is already in list, move to top
     if (userSearches.includes(search)){
       userSearches.splice(userSearches.indexOf(search), 1)
     }
@@ -142,17 +146,20 @@ $(document).ready(function () {
     userSearches.unshift(search);
     localStorage.setItem("marvelSearches", JSON.stringify(userSearches))
       
+    // limits length of search list to 5
     if (userSearches.length > 5) {
         userSearches.length = 5
       } 
       
+      // empties list
       searchesList.empty()
 
-      
+          // loops through userSearches and creates buttons, as well as event listener for getting info when clicked
       for (let i = 0; i < userSearches.length; i++) {
 
         
         var searchButton = $ ("<button>")
+        searchButton.classList.addClass("btn","btn-card")
         searchButton[0].innerHTML = userSearches[i]
         console.log(searchButton)
         console.log(userSearches)
