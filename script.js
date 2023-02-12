@@ -72,14 +72,111 @@ $(document).ready(function () {
     $(".search-options").removeClass("hide");
   });
 
-  // starting the onClick function for 'Search'
-  $("#searchBtn").on("click", function (event) {
-    event.preventDefault();
-    let searchInput = $("#searchInput").val();
+  let searchesList = $("#searches-list")
+  let userSearches = []
+  const storedSearches = JSON.parse(localStorage.getItem('marvelSearches'));
+
+
+  function loadSearches (){
+    
+    // loops through storedSearches and creates buttons, as well as event listener for getting info when clicked
+    for (let i = 0; i < storedSearches.length; i++) {
+
+      var searchButton = $("<button>")
+      searchButton[0].classList.add("btn", "btn-card")
+      console.log(searchButton)
+      
+
+      searchButton[0].innerHTML = storedSearches[i]
+
+      searchButton.on("click", function(event){
+        event.preventDefault();
+
+  let searchInput = event.target.innerHTML
+  let marvelIdURL =
+    "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
+    searchInput +
+    "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+  // first ajax to turn the hero name in searchInput into an Id the API can use
+  $.ajax({
+    url: marvelIdURL,
+    method: "GET",
+  }).then(function (response) {
+    // store the first relevant character's id, log to be sure
+    var characterId = response.data.results[0].id;
+    console.log(characterId);
+
+    // logs all the relevant characters
+    console.log(response.data.results);
+
+ 
+    // new URL to search for comics of the chosen character
+
+    let marvelComicURL =
+      "https://gateway.marvel.com:443/v1/public/characters/" +
+      characterId +
+      "/comics?&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+    // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
+    $.ajax({
+      url: marvelComicURL,
+      method: "GET",
+    }).then(function (response) {
+      console.log(response.data.results);
+    });
+  });
+})
+
+      
+  let listItemWrapper = $("<li>")
+  listItemWrapper.append(searchButton)
+  searchesList.append(listItemWrapper)
+    }
+  }
+
+  loadSearches()
+
+
+  function saveSearch(search) {
+
+    // if search is already in list, move to top
+    if (userSearches.includes(search)){
+      userSearches.splice(userSearches.indexOf(search), 1)
+    }
+
+    userSearches.unshift(search);
+    localStorage.setItem("marvelSearches", JSON.stringify(userSearches))
+      
+    // limits length of search list to 5
+    if (userSearches.length > 5) {
+        userSearches.length = 5
+      } 
+      
+      // empties list
+      searchesList.empty()
+
+          // loops through userSearches and creates buttons, as well as event listener for getting info when clicked
+      for (let i = 0; i < userSearches.length; i++) {
+
+        
+        var searchButton = $("<button>")
+        searchButton[0].classList.add("btn", "btn-card")
+        
+        searchButton[0].innerHTML = userSearches[i]
+        console.log(searchButton)
+        console.log(userSearches)
+
+        searchButton.on("click", function(event){
+          event.preventDefault();
+
+    let searchInput = event.target.innerHTML
     let marvelIdURL =
       "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
       searchInput +
       "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+      saveSearch(searchInput)
 
     // first ajax to turn the hero name in searchInput into an Id the API can use
     $.ajax({
@@ -107,7 +204,55 @@ $(document).ready(function () {
         console.log(response.data.results);
       });
     });
-  });
+  })
+
+        
+    let listItemWrapper = $("<li>")
+    listItemWrapper.append(searchButton)
+    searchesList.append(listItemWrapper)
+      }
+  }
+
+  
+
+  // starting the onClick function for 'Search'
+  $("#searchBtn").on("click", function (event) {
+    event.preventDefault();
+    let searchInput = $("#searchInput").val();
+    let marvelIdURL =
+      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
+      searchInput +
+      "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+      saveSearch(searchInput)
+
+    // first ajax to turn the hero name in searchInput into an Id the API can use
+    $.ajax({
+      url: marvelIdURL,
+      method: "GET",
+    }).then(function (response) {
+      // store the first relevant character's id, log to be sure
+      var characterId = response.data.results[0].id;
+      console.log(characterId);
+
+      // logs all the relevant characters
+      console.log(response.data.results);
+
+      // new URL to search for comics of the chosen character
+      let marvelComicURL =
+        "https://gateway.marvel.com:443/v1/public/characters/" +
+        characterId +
+        "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+      // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
+      $.ajax({
+        url: marvelComicURL,
+        method: "GET",
+      }).then(function (response) {
+        console.log(response.data.results);
+      })
+    })
+  })
 });
 
 let hero = {
@@ -148,5 +293,4 @@ $.ajax({
   $("#bio-group").text(hero.group)
   $("#bio-img").attr("src", hero.img)
   
-
 })
