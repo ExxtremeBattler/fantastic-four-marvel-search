@@ -82,8 +82,10 @@ $(document).ready(function () {
     // loops through storedSearches and creates buttons, as well as event listener for getting info when clicked
     for (let i = 0; i < storedSearches.length; i++) {
 
-      var searchButton = $ ("<button>")
-      searchButton.classList.addClass("btn","btn-card")
+      var searchButton = $("<button>")
+      searchButton[0].classList.add("btn", "btn-card")
+      console.log(searchButton)
+      
 
       searchButton[0].innerHTML = storedSearches[i]
 
@@ -158,8 +160,9 @@ $(document).ready(function () {
       for (let i = 0; i < userSearches.length; i++) {
 
         
-        var searchButton = $ ("<button>")
-        searchButton.classList.addClass("btn","btn-card")
+        var searchButton = $("<button>")
+        searchButton[0].classList.add("btn", "btn-card")
+        
         searchButton[0].innerHTML = userSearches[i]
         console.log(searchButton)
         console.log(userSearches)
