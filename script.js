@@ -152,7 +152,6 @@ $(document).ready(function () {
   $("#advanceBtn").on("click", function (event) {
     event.preventDefault();
     $(".search-options").removeClass("hide");
-    $("#trending").addClass("hide");
   });
 
   trendingUniverse();
@@ -167,10 +166,6 @@ $(document).ready(function () {
   function loadSearches() {
     // loops through storedSearches and creates buttons, as well as event listener for getting info when clicked
     for (let i = 0; i < storedSearches.length; i++) {
-      var searchButton = $("<button>");
-      searchButton[0].classList.add("btn", "btn-card");
-      console.log(searchButton);
-
       searchButton[0].innerHTML = storedSearches[i];
 
       searchButton.on("click", function (event) {
@@ -293,6 +288,7 @@ $(document).ready(function () {
   // starting the onClick function for 'Search'
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
+
     let searchInput = $("#searchInput").val();
     let marvelIdURL =
       "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
@@ -307,7 +303,7 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       // store the first relevant character's id, log to be sure
-      var characterId = response.data.results[0].id;
+      const characterId = response.data.results[0].id;
       console.log(characterId);
 
       // logs all the relevant characters

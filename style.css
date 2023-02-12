@@ -158,6 +158,10 @@ h4 {
   padding-left: 1.8rem;
 }
 
+#searches-list {
+  list-style: none;
+}
+
 /* EXPLORE SECTION -------------------------------------------------- */
 .row-card h3 {
   margin-top: 3.2rem;
@@ -225,7 +229,7 @@ h4 {
 }
 
 .bio-results {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   margin-top: -0.8rem;
   font-weight: 400;
 }
