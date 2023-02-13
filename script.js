@@ -247,10 +247,39 @@ $(document).ready(function () {
 
     let marvelComicURL = ""
 
-    function getCreatorID(creator) {
-      
+    var creatorId;
+    
+    function callback(response) {
+      creatorId = response.data.results[0].id;
+      console.log(creatorId)
+      return creatorId
     }
 
+    function getCreatorID() {
+
+      marvelCreatorURL = "https://gateway.marvel.com:443/v1/public/creators?nameStartsWith=" + creator
+      +"&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b"
+
+      
+
+      $.ajax({
+        url: marvelCreatorURL,
+        method: "GET",
+       'global': false,
+       'success': function(data){
+        callback(data);
+       }
+      })
+      // }).then(function (response) {
+      //   creatorId = response.data.results[0].id
+      //   console.log(response)
+      // })
+
+      
+
+    }
+
+    getCreatorID()
 
     // if(year && series && creator){
 
@@ -263,59 +292,55 @@ $(document).ready(function () {
     //   "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
      
     // }
-    
-    if (!year && !series && !creator){
 
-      marvelComicURL =
-        "https://gateway.marvel.com:443/v1/public/characters/" +
-        characterId +
-        "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+    // if (!year && !series && !creator){
 
-    }
-    else if (!creator){
+      // marvelComicURL =
+      //   "https://gateway.marvel.com:443/v1/public/characters/" +
+      //   characterId +
+      //   "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+    // }
+    // else if (!creator){
       
-      marvelComicURL =
-      "https://gateway.marvel.com:443/v1/public/characters/" +
-      characterId +
-      "/comics?startYear="+ year + 
-      "&titleStartsWith=" + series +
-      "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+    //   marvelComicURL =
+    //   "https://gateway.marvel.com:443/v1/public/characters/" +
+    //   characterId +
+    //   "/comics?startYear="+ year + 
+    //   "&titleStartsWith=" + series +
+    //   "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
      
-    }
-    else if (!series){
+    // }
+    // else if (!series){
       
-      marvelComicURL =
-      "https://gateway.marvel.com:443/v1/public/characters/" +
-      characterId +
-      "/comics?startYear="+ year +
-      "&creator = " + getCreatorID() +
-      "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+    //   marvelComicURL =
+    //   "https://gateway.marvel.com:443/v1/public/characters/" +
+    //   characterId +
+    //   "/comics?startYear="+ year +
+    //   "&creator = " + getCreatorID() +
+    //   "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
      
-    }
-    else if(!year){
+    // }
+    // else if(!year){
       
-      marvelComicURL =
-      "https://gateway.marvel.com:443/v1/public/characters/" +
-      characterId +
-      "/comics?"+
-      "&titleStartsWith=" + series +
-      "&creator = " + getCreatorID() +
-      "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-    }
+    //   marvelComicURL =
+    //   "https://gateway.marvel.com:443/v1/public/characters/" +
+    //   characterId +
+    //   "/comics?"+
+    //   "&titleStartsWith=" + series +
+    //   "&creator = " + getCreatorID() +
+    //   "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+    // }
     
     
     
 
       //new URL to search for comics of the chosen character
 
-      // let marvelComicURL =
-      // "https://gateway.marvel.com:443/v1/public/characters/" +
-      // characterId +
-      // "/comics?startYear="+ year + 
-      // "&titleStartsWith=" + series +
-      //  "&creator = " + creator +
-      // "&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-     
+      marvelComicURL =
+      "https://gateway.marvel.com:443/v1/public/characters/" +
+      characterId +
+      "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
   
       // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
       $.ajax({
