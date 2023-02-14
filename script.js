@@ -22,7 +22,7 @@ function trendingHero() {
 
     while (allHeros.length > 0) {
       const randomHero = get_random(allHeros);
-      console.log(randomHero);
+
       const noImg =
         "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
@@ -67,7 +67,6 @@ function trendingComic() {
 
     while (allComics.length > 0) {
       const randomComic = get_random(allComics);
-      console.log(randomComic);
 
       if (randomComic.characters.items.length > 0) {
         const randomComicData = {
@@ -108,7 +107,7 @@ function trendingCreator() {
 
     while (allCreators.length > 0) {
       const randomCreator = get_random(allCreators);
-      console.log(randomCreator);
+
       const noImg =
         "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
@@ -145,6 +144,8 @@ function trendingUniverse() {
   trendingCreator();
 }
 
+trendingUniverse();
+
 $(document).ready(function () {
   //makes sure html & css load before running the JS
   // SEARCH
@@ -153,8 +154,6 @@ $(document).ready(function () {
     event.preventDefault();
     $(".search-options").removeClass("hide");
   });
-
-  trendingUniverse();
 
   let searchesList = $("#searches-list");
   let userSearches = [];
@@ -290,95 +289,88 @@ $(document).ready(function () {
   }
 
   // starting the onClick function for 'Search'
-  $("#searchBtn").on("click", function (event) {
-    event.preventDefault();
+  // $("#searchBtn").on("click", function (event) {
+  //   event.preventDefault();
 
-    let searchInput = $("#searchInput").val();
-    let marvelIdURL =
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
-      searchInput +
-      "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+  //   let searchInput = $("#searchInput").val();
+  //   let marvelIdURL =
+  //     "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
+  //     searchInput +
+  //     "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
 
-    saveSearch(searchInput);
+  //   saveSearch(searchInput);
 
-    // first ajax to turn the hero name in searchInput into an Id the API can use
-    $.ajax({
-      url: marvelIdURL,
-      method: "GET",
-    }).then(function (response) {
-      // store the first relevant character's id, log to be sure
-      const characterId = response.data.results[0].id;
-      console.log(characterId);
+  //   // first ajax to turn the hero name in searchInput into an Id the API can use
+  //   $.ajax({
+  //     url: marvelIdURL,
+  //     method: "GET",
+  //   }).then(function (response) {
+  //     // store the first relevant character's id, log to be sure
+  //     const characterId = response.data.results[0].id;
+  //     console.log(characterId);
 
-      // logs all the relevant characters
-      console.log(response.data.results);
+  //     // logs all the relevant characters
+  //     console.log(response.data.results);
 
-      // new URL to search for comics of the chosen character
-      let marvelComicURL =
-        "https://gateway.marvel.com:443/v1/public/characters/" +
-        characterId +
-        "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+  //     // new URL to search for comics of the chosen character
+  //     let marvelComicURL =
+  //       "https://gateway.marvel.com:443/v1/public/characters/" +
+  //       characterId +
+  //       "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
 
-      // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
-      $.ajax({
-        url: marvelComicURL,
-        method: "GET",
-      }).then(function (response) {
-        console.log(response.data.results);
-      });
-    });
-  });
+  //     // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
+  //     $.ajax({
+  //       url: marvelComicURL,
+  //       method: "GET",
+  //     }).then(function (response) {
+  //       console.log(response.data.results);
+  //     });
+  //   });
+  // });
 });
 
-let hero = {
-  name:"",
-  appearance:"",
-  firstname:"",
-  alignment:"",
-  group:"",
-  img:"",
-}
+// superhero function that calls on the api
+function superhero(marvelCharacter) {
+  const superqueryURL =
+    "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
 
-// superhero function that calls on the api 
-function superhero(marvelcharacter){
+  $.ajax({
+    url: superqueryURL + "search/" + marvelCharacter,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
 
-let superqueryURL =
-  "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
-$.ajax({
-  url: superqueryURL + "search/" + marvelcharacter,
-  method: "GET",
-}).then(function (response) {
-  
-  hero.name = response.results[0].name;
-  hero.appearance = response.results[0].biography["first-appearance"];
-  hero.firstname = response.results[0].biography["full-name"];
-  hero.alignment = response.results[0].biography.alignment;
-  hero.group = response.results[0].connections["group-affiliation"];
-  hero.img = response.results[0].image.url;    
-  })
+    const hero = {
+      name: response.results[0].name,
+      appearance: response.results[0].biography["first-appearance"],
+      firstname: response.results[0].biography["full-name"],
+      alignment: response.results[0].biography.alignment,
+      group: response.results[0].connections["group-affiliation"],
+      img: response.results[0].image.url,
+    };
 
-  $("#hero-name").text(hero.name)
-  $("#bio-nickname").text(hero.name)
-  $("#bio-appearance").text(hero.appearance)
-  $("#bio-firstname").text(hero.firstname)
-  $("#bio-alignment").text(hero.alignment)
-  $("#bio-group").text(hero.group)
-  $("#bio-img").attr("src", hero.img)
-  
+    $("#hero-name").text(hero.name);
+    $("#bio-nickname").text(hero.name);
+    $("#bio-appearance").text(hero.appearance);
+    $("#bio-firstname").text(hero.firstname);
+    $("#bio-alignment").text(hero.alignment);
+    $("#bio-group").text(hero.group);
+    $("#bio-img").attr("src", hero.img);
+  });
 }
 
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
-  superhero($("#searchInput").val())
+  superhero($("#searchInput").val());
+
+  $("#searchInput").val("");
   $("#trending").addClass("hide");
-  $("#searchResult").removeClass("hide")
-})
+  $("#searchResult").removeClass("hide");
+});
 
 $("#visitBtn").on("click", function (event) {
   event.preventDefault();
   superhero();
   $("#trending").addClass("hide");
-  $("#searchResult").removeClass("hide")
-})
-
-//change above to randomhero.name
+  $("#searchResult").removeClass("hide");
+});
