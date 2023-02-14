@@ -149,7 +149,7 @@ $.ajax({
 
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
-  superhero()
+  superhero($("#searchInput").val())
   $("#trending").addClass("hide");
   $("#searchResult").removeClass("hide")
 })
