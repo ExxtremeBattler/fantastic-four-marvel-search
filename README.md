@@ -2,6 +2,7 @@
 The Fantastic Four's first project for Module 9 of Bootcamp. 
 
 Deployed Appliation can be found at : (**insert link**)
+
 ## Description
 
 The purpose of this project was to build a program that allows a user to search for a MARVEL Comics character, and recieve miscellaneous informnation about said character, such as comics and movies they appear in.
@@ -23,6 +24,7 @@ The website will now display various information about said character for your v
 The last 5 searches will be saved in a list, to the right of the search bar. Clicking any particular saved character in this list will fetch the relevant information for them once more.
 
 (**insert demo here**)
+
 ## Credits
 
 - Jwray99
@@ -34,8 +36,10 @@ The last 5 searches will be saved in a list, to the right of the search bar. Cli
 
 Please refer to the LICENSE file in the repository.
 ## API's Used
+
+### SuperheroAPI
 https://superheroapi.com/
-###
+### MarvelAPI
 https://developer.marvel.com/
 
 
