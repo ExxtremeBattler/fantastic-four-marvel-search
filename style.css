@@ -78,6 +78,15 @@ h4 {
   margin-top: 6.4rem;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.logo-link:hover {
+  color: var(--white);
+}
+
 /*  SEARCH FORM -------------------------------------------------- */
 .jumbo {
   background-color: var(--shade);

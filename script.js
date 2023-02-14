@@ -7,6 +7,13 @@ function generateRandomLetter() {
   return alphabet[Math.floor(Math.random() * alphabet.length)];
 }
 
+// trigger a button click on the Enter key in a text box
+$("#searchInput").keyup(function (event) {
+  if (event.keyCode === 13) {
+    $("#searchBtn").click();
+  }
+});
+
 // superhero function that calls on the api
 function superhero(marvelCharacter) {
   const superqueryURL =
@@ -16,6 +23,7 @@ function superhero(marvelCharacter) {
     url: superqueryURL + "search/" + marvelCharacter,
     method: "GET",
   }).then(function (response) {
+    console.log(response);
     const hero = {
       name: response.results[0].name,
       appearance: response.results[0].biography["first-appearance"],
@@ -33,6 +41,56 @@ function superhero(marvelCharacter) {
     $("#bio-group").text(hero.group);
     $("#bio-img").attr("src", hero.img);
   });
+}
+
+const pastSearchesNo = 5;
+// creates array in local storage to save users history
+let userSearches = JSON.parse(localStorage.getItem("userSearches"));
+if (userSearches == null) {
+  userSearches = [];
+}
+// initialize with stored history
+populateHistory();
+
+// append current search to history
+function appendToHistory(search) {
+  // check if new search is saved already in history section
+  // if yes move this search to the top
+  const index = userSearches.indexOf(search);
+  if (index > -1) {
+    userSearches.splice(index, 1);
+  } else {
+    if (userSearches.length === pastSearchesNo) {
+      // if number of user searches is equal as defined globally, remove last element from array
+      // userSearches.pop();
+    }
+  }
+  // adds new user search to the top of the list
+  userSearches.unshift(search);
+  // clear user search history before it can display new searches
+  $("#searches-list").empty();
+  populateHistory();
+}
+
+// populate history display
+function populateHistory() {
+  // creates search history section/ buttons
+  const size =
+    userSearches.length >= pastSearchesNo
+      ? pastSearchesNo
+      : userSearches.length;
+  for (let i = 0; i < size; i++) {
+    let lastSearch = $("<button>").text(userSearches[i]);
+    lastSearch.attr("class", "btn btn-card");
+    // click past search - display again hero
+    lastSearch.on("click", function (event) {
+      event.preventDefault();
+      superhero(lastSearch.text());
+      appendToHistory(lastSearch.text());
+    });
+    $("#searches-list").append(lastSearch);
+  }
+  localStorage.setItem("userSearches", JSON.stringify(userSearches));
 }
 
 function trendingHero() {
@@ -72,7 +130,14 @@ function trendingHero() {
 
         $("#card-hero-link").on("click", function (event) {
           event.preventDefault();
-          superhero(randomHeroData.name);
+
+          let heroName = randomHeroData.name;
+          const bracketIndex = heroName.indexOf("(");
+          if (bracketIndex >= 0) {
+            heroName = heroName.substring(0, bracketIndex);
+          }
+
+          superhero(heroName);
           $("#trending").addClass("hide");
           $("#searchResult").removeClass("hide");
         });
@@ -105,7 +170,13 @@ function trendingComic() {
     while (allComics.length > 0) {
       const randomComic = get_random(allComics);
 
-      if (randomComic.characters.items.length > 0) {
+      const noImg =
+        "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
+
+      if (
+        randomComic.thumbnail.path != noImg &&
+        randomComic.characters.items.length > 0
+      ) {
         const randomComicData = {
           title: randomComic.title,
           char: randomComic.characters.items[0].name,
@@ -181,196 +252,24 @@ function trendingUniverse() {
   trendingCreator();
 }
 
-trendingUniverse();
+// makes sure html & css load before running the JS
+$(document).ready(function () {
+  // SEARCH
+  // advance search options onclick handler
+  $("#advanceBtn").on("click", function (event) {
+    event.preventDefault();
+    $(".search-options").removeClass("hide");
+  });
 
-// $(document).ready(function () {
-//   //makes sure html & css load before running the JS
-//   // SEARCH
-//   // advance search options onclick handler
-//   $("#advanceBtn").on("click", function (event) {
-//     event.preventDefault();
-//     $(".search-options").removeClass("hide");
-//   });
+  trendingUniverse();
 
-//   let searchesList = $("#searches-list");
-//   let userSearches = [];
-//   let storedSearches = JSON.parse(localStorage.getItem("marvelSearches"));
-//   if (storedSearches == null) {
-//     storedSearches = [];
-//   }
+  $("#searchBtn").on("click", function (event) {
+    event.preventDefault();
+    superhero($("#searchInput").val());
+    appendToHistory($("#searchInput").val());
 
-//   function loadSearches() {
-//     // loops through storedSearches and creates buttons, as well as event listener for getting info when clicked
-//     for (let i = 0; i < storedSearches.length; i++) {
-//       const searchButton = $("<button>");
-//       searchButton[0].classList.add("btn", "btn-card");
-//       console.log(searchButton);
-
-//       searchButton[0].innerHTML = storedSearches[i];
-
-//       searchButton.on("click", function (event) {
-//         event.preventDefault();
-
-//         let searchInput = event.target.innerHTML;
-//         let marvelIdURL =
-//           "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
-//           searchInput +
-//           "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//         // first ajax to turn the hero name in searchInput into an Id the API can use
-//         $.ajax({
-//           url: marvelIdURL,
-//           method: "GET",
-//         }).then(function (response) {
-//           // store the first relevant character's id, log to be sure
-//           var characterId = response.data.results[0].id;
-//           console.log(characterId);
-
-//           // logs all the relevant characters
-//           console.log(response.data.results);
-
-//           // new URL to search for comics of the chosen character
-
-//           let marvelComicURL =
-//             "https://gateway.marvel.com:443/v1/public/characters/" +
-//             characterId +
-//             "/comics?&orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//           // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
-//           $.ajax({
-//             url: marvelComicURL,
-//             method: "GET",
-//           }).then(function (response) {
-//             console.log(response.data.results);
-//           });
-//         });
-//       });
-
-//       let listItemWrapper = $("<li>");
-//       listItemWrapper.append(searchButton);
-//       searchesList.append(listItemWrapper);
-//     }
-//   }
-
-//   loadSearches();
-
-//   function saveSearch(search) {
-//     // if search is already in list, move to top
-//     if (userSearches.includes(search)) {
-//       userSearches.splice(userSearches.indexOf(search), 1);
-//     }
-
-//     userSearches.unshift(search);
-//     localStorage.setItem("marvelSearches", JSON.stringify(userSearches));
-
-//     // limits length of search list to 5
-//     if (userSearches.length > 5) {
-//       userSearches.length = 5;
-//     }
-
-//     // empties list
-//     searchesList.empty();
-
-//     // loops through userSearches and creates buttons, as well as event listener for getting info when clicked
-//     for (let i = 0; i < userSearches.length; i++) {
-//       var searchButton = $("<button>");
-//       searchButton[0].classList.add("btn", "btn-card");
-
-//       searchButton[0].innerHTML = userSearches[i];
-//       console.log(searchButton);
-//       console.log(userSearches);
-
-//       searchButton.on("click", function (event) {
-//         event.preventDefault();
-
-//         let searchInput = event.target.innerHTML;
-//         let marvelIdURL =
-//           "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
-//           searchInput +
-//           "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//         saveSearch(searchInput);
-
-//         // first ajax to turn the hero name in searchInput into an Id the API can use
-//         $.ajax({
-//           url: marvelIdURL,
-//           method: "GET",
-//         }).then(function (response) {
-//           // store the first relevant character's id, log to be sure
-//           var characterId = response.data.results[0].id;
-//           console.log(characterId);
-
-//           // logs all the relevant characters
-//           console.log(response.data.results);
-
-//           // new URL to search for comics of the chosen character
-//           let marvelComicURL =
-//             "https://gateway.marvel.com:443/v1/public/characters/" +
-//             characterId +
-//             "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//           // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
-//           $.ajax({
-//             url: marvelComicURL,
-//             method: "GET",
-//           }).then(function (response) {
-//             console.log(response.data.results);
-//           });
-//         });
-//       });
-
-//       let listItemWrapper = $("<li>");
-//       listItemWrapper.append(searchButton);
-//       searchesList.append(listItemWrapper);
-//     }
-//   }
-
-//   // starting the onClick function for 'Search'
-//   // $("#searchBtn").on("click", function (event) {
-//   //   event.preventDefault();
-
-//   //   let searchInput = $("#searchInput").val();
-//   //   let marvelIdURL =
-//   //     "https://gateway.marvel.com/v1/public/characters?nameStartsWith=" +
-//   //     searchInput +
-//   //     "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//   //   saveSearch(searchInput);
-
-//   //   // first ajax to turn the hero name in searchInput into an Id the API can use
-//   //   $.ajax({
-//   //     url: marvelIdURL,
-//   //     method: "GET",
-//   //   }).then(function (response) {
-//   //     // store the first relevant character's id, log to be sure
-//   //     const characterId = response.data.results[0].id;
-//   //     console.log(characterId);
-
-//   //     // logs all the relevant characters
-//   //     console.log(response.data.results);
-
-//   //     // new URL to search for comics of the chosen character
-//   //     let marvelComicURL =
-//   //       "https://gateway.marvel.com:443/v1/public/characters/" +
-//   //       characterId +
-//   //       "/comics?orderBy=-onsaleDate&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
-
-//   //     // second ajax to return the last 20 or so comics for the character, will update to 5 tomorrow, check log for results
-//   //     $.ajax({
-//   //       url: marvelComicURL,
-//   //       method: "GET",
-//   //     }).then(function (response) {
-//   //       console.log(response.data.results);
-//   //     });
-//   //   });
-//   // });
-// });
-
-$("#searchBtn").on("click", function (event) {
-  event.preventDefault();
-  superhero($("#searchInput").val());
-
-  $("#searchInput").val("");
-  $("#trending").addClass("hide");
-  $("#searchResult").removeClass("hide");
+    $("#searchInput").val("");
+    $("#trending").addClass("hide");
+    $("#searchResult").removeClass("hide");
+  });
 });
