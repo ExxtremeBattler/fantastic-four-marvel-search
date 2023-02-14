@@ -22,7 +22,6 @@ The website will now display various information about said character for your v
 
 The last 5 searches will be saved in a list, to the right of the search bar. Clicking any particular saved character in this list will fetch the relevant information for them once more.
 
-
 (**insert demo here**)
 ## Credits
 
@@ -34,11 +33,9 @@ The last 5 searches will be saved in a list, to the right of the search bar. Cli
 ## License
 
 Please refer to the LICENSE file in the repository.
-
 ## API's Used
 https://superheroapi.com/
 ###
 https://developer.marvel.com/
-###
-https://developer.marvel.com/docs#!/public/getComicsCollection_get_6 (KEY: 6f68ec270b01384876787724cd124e64)
+
 
