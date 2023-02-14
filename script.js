@@ -264,7 +264,7 @@ let hero = {
   img:"",
 }
 
-
+// superhero function that calls on the api 
 function superhero(marvelcharacter){
 
 let superqueryURL =
