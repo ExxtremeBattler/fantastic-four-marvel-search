@@ -118,20 +118,17 @@ let hero = {
   group:"",
   img:"",
 }
-$("#searchBtn").on("click", function (event) {
-  event.preventDefault();
-// let marvelcharacter = $("#searchInput").val;
-let marvelcharacter = $("#searchInput").val();
+
+
+function superhero(marvelcharacter){
+
 let superqueryURL =
   "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
-//gets a character id
 $.ajax({
   url: superqueryURL + "search/" + marvelcharacter,
   method: "GET",
 }).then(function (response) {
-  console.log(response)
-  console.log(response.results[0].image.url)
-
+  
   hero.name = response.results[0].name;
   hero.appearance = response.results[0].biography["first-appearance"];
   hero.firstname = response.results[0].biography["full-name"];
@@ -148,4 +145,20 @@ $.ajax({
   $("#bio-group").text(hero.group)
   $("#bio-img").attr("src", hero.img)
   
+}
+
+$("#searchBtn").on("click", function (event) {
+  event.preventDefault();
+  superhero()
+  $("#trending").addClass("hide");
+  $("#searchResult").removeClass("hide")
 })
+
+$("#visitBtn").on("click", function (event) {
+  event.preventDefault();
+  superhero();
+  $("#trending").addClass("hide");
+  $("#searchResult").removeClass("hide")
+})
+
+//change above to randomhero.name
