@@ -16,14 +16,15 @@ A marvel hero search application that allows a user to search for a marvel chara
  
 Page runs in the browser and features dynamically updated HTML and CSS.
 
-Application uses the [Marvel API](https://developer.marvel.com/) to retrievecomic and creator data for characters. 
+Application uses the [Marvel API](https://developer.marvel.com/) to retrieve comic and creator data for characters. 
 
 You will need to register for an API key in order to use this API, with a limit of 3000 calls per day. 
 
-A timestamp and hash will also be required for authentication (you can find more about that [here](https://developer.marvel.com/documentation/authorization)) 
+A timestamp and hash will also be required for authentication (you can find more about that [here](https://developer.marvel.com/documentation/authorization)).
 
 
 Application also uses the [Superhero API](https://superheroapi.com/) to work fetch nickname, full name, alignment, first appearance, and group affiliation. Be sure to read the documentation carefully! 
+
 ## Installation
 
 Add the Bootstrap library links right before your css and closing `</head>` tag in
@@ -86,6 +87,7 @@ The last 5 searches will be saved in a list, to the right of the search bar. Cli
 - EAmrogowicz
 - ExxtremeBattler
 - Bootcamp for teaching us the skills required for this project.
+
 ## License
 
 Please refer to the LICENSE file in the repository.
