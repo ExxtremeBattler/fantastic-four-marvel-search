@@ -31,33 +31,38 @@ $(document).ready(function () {
       url: superqueryURL + "search/" + marvelCharacter,
       method: "GET",
     }).then(function (response) {
-      const hero = {
-        name: response.results[0].name,
-        publisher: response.results[0].biography.publisher,
-        appearance: response.results[0].biography["first-appearance"],
-        fullName: response.results[0].biography["full-name"],
-        aliases: response.results[0].biography["aliases"],
-        alignment: response.results[0].biography.alignment,
-        group: response.results[0].connections["group-affiliation"],
-        img: response.results[0].image.url,
-      };
-
-      $("#hero-name").text(hero.name);
-      $("#bio-publisher").text(hero.publisher);
-      $("#bio-nickname").text(hero.aliases);
-      $("#bio-fullname").text(hero.fullName);
-      $("#bio-appearance").text(hero.appearance);
-      $("#bio-alignment").text(hero.alignment);
-      $("#bio-group").text(hero.group);
-      $("#bio-img").attr("src", hero.img);
-
-      // check publisher and hide carousel accordingly
-      if (hero.publisher === "DC Comics") {
-        $("#carouselExampleCaptions").addClass("hide");
-        $("#carousel-title").addClass("hide");
+      // error catch
+      if (response.response === "error") {
+        $(".modal").modal("show");
       } else {
-        $("#carouselExampleCaptions").removeClass("hide");
-        $("#carousel-title").removeClass("hide");
+        const hero = {
+          name: response.results[0].name,
+          publisher: response.results[0].biography.publisher,
+          appearance: response.results[0].biography["first-appearance"],
+          fullName: response.results[0].biography["full-name"],
+          aliases: response.results[0].biography["aliases"],
+          alignment: response.results[0].biography.alignment,
+          group: response.results[0].connections["group-affiliation"],
+          img: response.results[0].image.url,
+        };
+
+        $("#hero-name").text(hero.name);
+        $("#bio-publisher").text(hero.publisher);
+        $("#bio-nickname").text(hero.aliases);
+        $("#bio-fullname").text(hero.fullName);
+        $("#bio-appearance").text(hero.appearance);
+        $("#bio-alignment").text(hero.alignment);
+        $("#bio-group").text(hero.group);
+        $("#bio-img").attr("src", hero.img);
+
+        // check publisher and hide carousel accordingly
+        if (hero.publisher === "DC Comics") {
+          $("#carouselExampleCaptions").addClass("hide");
+          $("#carousel-title").addClass("hide");
+        } else {
+          $("#carouselExampleCaptions").removeClass("hide");
+          $("#carousel-title").removeClass("hide");
+        }
       }
     });
   }
@@ -293,11 +298,15 @@ $(document).ready(function () {
   // MAIN SEARCH CLICK HANDLER
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
-    superhero($("#searchInput").val());
-    appendToHistory($("#searchInput").val());
-    // clears search input filed
-    $("#searchInput").val("");
-    $("#trending").addClass("hide");
-    $("#searchResult").removeClass("hide");
+    if (!$("#searchInput").val() /* add conditions for no api results too */) {
+      $(".modal").modal("show");
+    } else {
+      superhero($("#searchInput").val());
+      appendToHistory($("#searchInput").val());
+      // clears search input filed
+      $("#searchInput").val("");
+      $("#trending").addClass("hide");
+      $("#searchResult").removeClass("hide");
+    }
   });
 });
