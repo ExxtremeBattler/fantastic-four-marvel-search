@@ -78,6 +78,15 @@ h4 {
   margin-top: 6.4rem;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.logo-link:hover {
+  color: var(--white);
+}
+
 /*  SEARCH FORM -------------------------------------------------- */
 .jumbo {
   background-color: var(--shade);
@@ -222,6 +231,12 @@ h4 {
   font-size: 1rem;
   font-weight: 100;
   color: var(--accent-variant);
+}
+
+.bio-publisher {
+  margin-top: 0;
+  font-size: 1.6rem;
+  margin-bottom: 3.2rem;
 }
 
 .bio-type:first-child {
