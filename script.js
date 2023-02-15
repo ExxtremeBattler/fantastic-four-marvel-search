@@ -52,6 +52,14 @@ $(document).ready(function () {
       $("#bio-alignment").text(hero.alignment);
       $("#bio-group").text(hero.group);
       $("#bio-img").attr("src", hero.img);
+
+      if (hero.publisher === "DC Comics") {
+        $("#carouselExampleCaptions").addClass("hide");
+        $("#carousel-title").addClass("hide");
+      } else {
+        $("#carouselExampleCaptions").removeClass("hide");
+        $("#carousel-title").removeClass("hide");
+      }
     });
   }
 
