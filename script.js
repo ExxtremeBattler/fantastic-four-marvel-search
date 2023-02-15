@@ -100,10 +100,10 @@ $(document).ready(function () {
         comicLink1: response.data.results[1].urls[0].url,
         comicBook1: response.data.results[1].thumbnail.path,
         comic2: response.data.results[2].title,
-        comicLink1: response.data.results[2].urls[0].url,
+        comicLink2: response.data.results[2].urls[0].url,
         comicBook2: response.data.results[2].thumbnail.path,
         comic3: response.data.results[3].title,
-        comicLink1: response.data.results[3].urls[0].url,
+        comicLink3: response.data.results[3].urls[0].url,
         comicBook3: response.data.results[3].thumbnail.path,
       };
 
@@ -112,10 +112,11 @@ $(document).ready(function () {
       $("#comic-book1").attr("src", comicExample.comicBook1 + ".jpg");
 
       $("#comic2").text(comicExample.comic2);
+      $("#comic-link2").attr("src", comicExample.comicLink2 + ".jpg");
       $("#comic-book2").attr("src", comicExample.comicBook2 + ".jpg");
-      $("#comic3").text(comicExample.comic3);
 
-      $("#comic-book2").attr("src", comicExample.comicBook2 + ".jpg");
+      $("#comic3").text(comicExample.comic3);
+      $("#comic-link2").attr("src", comicExample.comicLink3 + ".jpg");
       $("#comic-book3").attr("src", comicExample.comicBook3 + ".jpg");
     });
   }
@@ -165,6 +166,8 @@ $(document).ready(function () {
         event.preventDefault();
         superhero(lastSearch.text());
         IDfetcher(lastSearch.text());
+
+        $(".search-options").addClass("hide");
         $("#trending").addClass("hide");
         $("#searchResult").removeClass("hide");
 
@@ -227,6 +230,8 @@ $(document).ready(function () {
             }
 
             superhero(heroName);
+            IDfetcher(heroName);
+            $(".search-options").addClass("hide");
             $("#trending").addClass("hide");
             $("#searchResult").removeClass("hide");
           });
@@ -361,6 +366,7 @@ $(document).ready(function () {
       appendToHistory($("#searchInput").val());
       // clears search input filed
       $("#searchInput").val("");
+      $(".search-options").addClass("hide");
       $("#trending").addClass("hide");
       $("#searchResult").removeClass("hide");
     }
