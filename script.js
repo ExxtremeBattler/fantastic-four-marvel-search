@@ -35,17 +35,20 @@ $(document).ready(function () {
       console.log(response);
       const hero = {
         name: response.results[0].name,
+        publisher: response.results[0].biography.publisher,
         appearance: response.results[0].biography["first-appearance"],
-        firstname: response.results[0].biography["full-name"],
+        fullName: response.results[0].biography["full-name"],
+        aliases: response.results[0].biography["aliases"],
         alignment: response.results[0].biography.alignment,
         group: response.results[0].connections["group-affiliation"],
         img: response.results[0].image.url,
       };
 
       $("#hero-name").text(hero.name);
-      $("#bio-nickname").text(hero.name);
+      $("#bio-publisher").text(hero.publisher);
+      $("#bio-nickname").text(hero.aliases);
+      $("#bio-fullname").text(hero.fullName);
       $("#bio-appearance").text(hero.appearance);
-      $("#bio-firstname").text(hero.firstname);
       $("#bio-alignment").text(hero.alignment);
       $("#bio-group").text(hero.group);
       $("#bio-img").attr("src", hero.img);
@@ -95,6 +98,9 @@ $(document).ready(function () {
       lastSearch.on("click", function (event) {
         event.preventDefault();
         superhero(lastSearch.text());
+        $("#trending").addClass("hide");
+        $("#searchResult").removeClass("hide");
+        console.log(lastSearch.text());
         appendToHistory(lastSearch.text());
       });
       $("#searches-list").append(lastSearch);
@@ -117,6 +123,7 @@ $(document).ready(function () {
 
       while (allHeros.length > 0) {
         const randomHero = get_random(allHeros);
+        console.log(randomHero);
 
         const noImg =
           "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
