@@ -208,7 +208,6 @@ h4 {
 }
 
 /* SEARCH RESULT -------------------------------------------------- */
-
 .hero-section {
   margin-top: 8rem;
   margin-bottom: 6.4rem;
@@ -262,6 +261,11 @@ h4 {
 .carousel-img {
   height: 24rem;
   object-fit: cover;
+}
+
+/* modal */
+.modal {
+  color: black;
 }
 
 /* FOOTER -------------------------------------------------- */
