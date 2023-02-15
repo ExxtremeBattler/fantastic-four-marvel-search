@@ -32,6 +32,13 @@ $(document).ready(function () {
       url: superqueryURL + "search/" + marvelCharacter,
       method: "GET",
     }).then(function (response) {
+
+      if (response.response === "error"){
+        $(".modal").modal("show")
+      }
+      else{
+
+      
       console.log(response);
       const hero = {
         name: response.results[0].name,
@@ -52,7 +59,7 @@ $(document).ready(function () {
       $("#bio-alignment").text(hero.alignment);
       $("#bio-group").text(hero.group);
       $("#bio-img").attr("src", hero.img);
-    });
+    }});
   }
 
   const pastSearchesNo = 5;
@@ -180,6 +187,7 @@ $(document).ready(function () {
     $.ajax({
       url: marvelComicURL,
       method: "GET",
+      error: function(err){ console.log('my message' + err) }
     }).then(function (response) {
       const allComics = response.data.results;
 
@@ -227,6 +235,7 @@ $(document).ready(function () {
       url: marvelCreatorURL,
       method: "GET",
     }).then(function (response) {
+      
       const allCreators = response.data.results;
 
       while (allCreators.length > 0) {
@@ -272,11 +281,17 @@ $(document).ready(function () {
 
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
+
+    if (!($("#searchInput").val() || $("#hero-name").val()) /* add conditions for no api results too */ ){
+      $(".modal").modal("show")
+    } 
+    else{
     superhero($("#searchInput").val());
     appendToHistory($("#searchInput").val());
 
     $("#searchInput").val("");
     $("#trending").addClass("hide");
     $("#searchResult").removeClass("hide");
+    }
   });
 });
