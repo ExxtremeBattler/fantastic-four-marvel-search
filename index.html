@@ -36,7 +36,11 @@
   </head>
   <body>
     <header class="container-fluid">
-      <h1 class="container-md"><span>Marvel</span> Hero Search</h1>
+      <h1 class="container-md">
+        <a href="index.html" class="logo-link">
+          <span>Marvel</span> Hero Search
+        </a>
+      </h1>
     </header>
 
     <!-- SEARCH SECTION -->
@@ -110,7 +114,7 @@
 
           <aside id="recent-searches" class="col-lg-3 aside">
             <h4>Your search list:</h4>
-            <ul id="searches-list"></ul>
+            <div id="searches-list"></div>
           </aside>
         </div>
       </nav>
@@ -122,27 +126,35 @@
         <h2>Explore in the Universe</h2>
         <div class="row row-card">
           <div class="col-md">
-            <h3>Comics</h3>
-            <div class="card">
-              <img src="" id="card-comic-img" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h4 id="card-comic-title" class="card-title">Card title</h4>
-                <p id="card-comic-desc" class="card-text"></p>
-                <a href="" class="btn btn-card">More</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md">
             <h3>Character</h3>
             <div class="card">
               <img src="" id="card-hero-img" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h4 id="card-hero-title" class="card-title"></h4>
                 <p id="card-hero-desc" class="card-text"></p>
-                <a href="" class="btn btn-card">More</a>
+                <a href="" id="card-hero-link" class="btn btn-card">More</a>
               </div>
             </div>
           </div>
+
+          <div class="col-md">
+            <h3>Comics</h3>
+            <div class="card">
+              <img src="" id="card-comic-img" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h4 id="card-comic-title" class="card-title">Card title</h4>
+                <p id="card-comic-desc" class="card-text"></p>
+                <a
+                  href=""
+                  id="card-comic-link"
+                  class="btn btn-card"
+                  target="_blank"
+                  >More</a
+                >
+              </div>
+            </div>
+          </div>
+
           <div class="col-md">
             <h3>Creator</h3>
             <div class="card">
