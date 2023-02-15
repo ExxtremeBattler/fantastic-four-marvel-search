@@ -272,11 +272,17 @@ $(document).ready(function () {
 
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
+
+    if (!($("#searchInput").val()) /* add conditions for no api results too */ ){
+      $(".modal").modal("show")
+    } 
+    else{
     superhero($("#searchInput").val());
     appendToHistory($("#searchInput").val());
 
     $("#searchInput").val("");
     $("#trending").addClass("hide");
     $("#searchResult").removeClass("hide");
+    }
   });
 });

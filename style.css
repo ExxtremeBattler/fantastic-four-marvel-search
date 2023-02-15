@@ -254,6 +254,12 @@ h4 {
   color: var(--white);
 }
 
+/* modal */
+
+.modal{
+  color: black;
+}
+
 /* carousel */
 .carousel-inner {
   /* margin-top: 1.2rem; */
