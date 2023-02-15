@@ -1,13 +1,12 @@
 // makes sure html & css load before running the JS
 $(document).ready(function () {
-  // SEARCH
   // advance search options onclick handler
   $("#advanceBtn").on("click", function (event) {
     event.preventDefault();
     $(".search-options").removeClass("hide");
   });
 
-  // TRENDING IN THE UNIVERSE
+  // get random from arrays
   function get_random(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
@@ -16,14 +15,14 @@ $(document).ready(function () {
     return alphabet[Math.floor(Math.random() * alphabet.length)];
   }
 
-  // trigger a button click on the Enter key in a text box
+  // trigger a button click on the ENTER key in a text box
   $("#searchInput").keyup(function (event) {
     if (event.keyCode === 13) {
       $("#searchBtn").click();
     }
   });
 
-  // superhero function that calls on the api
+  // superhero function that calls on the API
   function superhero(marvelCharacter) {
     const superqueryURL =
       "https://marvel-cors.mrof.workers.dev/corsproxy/?apiurl=https://www.superheroapi.com/api/9055872414486600/";
@@ -32,7 +31,6 @@ $(document).ready(function () {
       url: superqueryURL + "search/" + marvelCharacter,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
       const hero = {
         name: response.results[0].name,
         publisher: response.results[0].biography.publisher,
@@ -53,6 +51,7 @@ $(document).ready(function () {
       $("#bio-group").text(hero.group);
       $("#bio-img").attr("src", hero.img);
 
+      // check publisher and hide carousel accordingly
       if (hero.publisher === "DC Comics") {
         $("#carouselExampleCaptions").addClass("hide");
         $("#carousel-title").addClass("hide");
@@ -63,12 +62,16 @@ $(document).ready(function () {
     });
   }
 
+  // SEARCH HISTORY
+  // limits visible searches on screen
   const pastSearchesNo = 5;
   // creates array in local storage to save users history
   let userSearches = JSON.parse(localStorage.getItem("userSearches"));
+  // create new empty array if there is nothing in the local storage
   if (userSearches == null) {
     userSearches = [];
   }
+
   // initialize with stored history
   populateHistory();
 
@@ -79,43 +82,44 @@ $(document).ready(function () {
     const index = userSearches.indexOf(search);
     if (index > -1) {
       userSearches.splice(index, 1);
-    } else {
-      if (userSearches.length === pastSearchesNo) {
-        // if number of user searches is equal as defined globally, remove last element from array
-        // userSearches.pop();
-      }
     }
     // adds new user search to the top of the list
     userSearches.unshift(search);
-    // clear user search history before it can display new searches
+    // clear user search history before it can display new updated searches
     $("#searches-list").empty();
     populateHistory();
   }
 
   // populate history display
   function populateHistory() {
-    // creates search history section/ buttons
+    // check how many buttons should be displayed on screen
     const size =
       userSearches.length >= pastSearchesNo
         ? pastSearchesNo
         : userSearches.length;
+
     for (let i = 0; i < size; i++) {
       let lastSearch = $("<button>").text(userSearches[i]);
       lastSearch.attr("class", "btn btn-card");
-      // click past search - display again hero
+
+      // click handler - display again hero
       lastSearch.on("click", function (event) {
         event.preventDefault();
         superhero(lastSearch.text());
         $("#trending").addClass("hide");
         $("#searchResult").removeClass("hide");
-        console.log(lastSearch.text());
+
+        //initialize function
         appendToHistory(lastSearch.text());
       });
       $("#searches-list").append(lastSearch);
     }
+    // save the search to local storage
     localStorage.setItem("userSearches", JSON.stringify(userSearches));
   }
 
+  // TRENDING IN THE UNIVERSE
+  // search for random superhero from Marvel API
   function trendingHero() {
     const startWith = generateRandomLetter();
     const marvelHeroURL =
@@ -128,14 +132,14 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       const allHeros = response.data.results;
-
+      // check list length
       while (allHeros.length > 0) {
         const randomHero = get_random(allHeros);
-        console.log(randomHero);
 
         const noImg =
           "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
+        // filter out elements if there is no image available or character wasn't in any series
         if (
           randomHero.series.items.length > 0 &&
           randomHero.thumbnail.path != noImg
@@ -152,10 +156,12 @@ $(document).ready(function () {
             `First appearance in ${randomHeroData.series}`
           );
 
+          // click handler - search data for that hero and display (initialize superhero)
           $("#card-hero-link").on("click", function (event) {
             event.preventDefault();
 
             let heroName = randomHeroData.name;
+            // remove brackets from API name result
             const bracketIndex = heroName.indexOf("(");
             if (bracketIndex >= 0) {
               heroName = heroName.substring(0, bracketIndex);
@@ -166,9 +172,9 @@ $(document).ready(function () {
             $("#searchResult").removeClass("hide");
           });
 
-          console.log(randomHeroData.name);
           return;
         } else {
+          // remove this name from the pool
           allHeros.splice(allHeros.indexOf(randomHero), 1);
         }
       }
@@ -177,6 +183,7 @@ $(document).ready(function () {
     });
   }
 
+  // search for random superhero from Marvel API
   function trendingComic() {
     const startWith = generateRandomLetter();
 
@@ -190,13 +197,14 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       const allComics = response.data.results;
-
+      // check list length
       while (allComics.length > 0) {
         const randomComic = get_random(allComics);
 
         const noImg =
           "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
+        // filter out elements if there is no image available or character wasn't in any series
         if (
           randomComic.thumbnail.path != noImg &&
           randomComic.characters.items.length > 0
@@ -216,6 +224,7 @@ $(document).ready(function () {
           $("#card-comic-link").attr("href", randomComicData.url);
           return;
         } else {
+          // remove this comic from the pool
           allComics.splice(allComics.indexOf(randomComic), 1);
         }
       }
@@ -237,12 +246,14 @@ $(document).ready(function () {
     }).then(function (response) {
       const allCreators = response.data.results;
 
+      // check list length
       while (allCreators.length > 0) {
         const randomCreator = get_random(allCreators);
 
         const noImg =
           "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
+        // filter out elements if there is no image available or character wasn't in any series
         if (
           randomCreator.thumbnail.path != noImg &&
           randomCreator.series.items.length > 0
@@ -262,6 +273,7 @@ $(document).ready(function () {
           $("#card-creator-link").attr("href", randomCreatorData.url);
           return;
         } else {
+          // remove this creator from the pool
           allCreators.splice(allCreators.indexOf(randomCreator), 1);
         }
       }
@@ -278,11 +290,12 @@ $(document).ready(function () {
 
   trendingUniverse();
 
+  // MAIN SEARCH CLICK HANDLER
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     superhero($("#searchInput").val());
     appendToHistory($("#searchInput").val());
-
+    // clears search input filed
     $("#searchInput").val("");
     $("#trending").addClass("hide");
     $("#searchResult").removeClass("hide");
