@@ -263,6 +263,11 @@ h4 {
   object-fit: cover;
 }
 
+/* modal */
+.modal {
+  color: black;
+}
+
 /* FOOTER -------------------------------------------------- */
 .footer {
   border-top: 1px solid var(--tint);
