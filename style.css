@@ -254,13 +254,29 @@ h4 {
 }
 
 /* carousel */
-.carousel-inner {
-  /* margin-top: 1.2rem; */
-}
 
 .carousel-img {
-  height: 24rem;
+  height: 32rem;
   object-fit: cover;
+}
+
+.comic-link {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 0.2rem 2.4rem;
+  letter-spacing: 2px;
+}
+
+.comic-link i {
+  margin-right: 1rem;
+}
+
+.comic-link:hover {
+  color: var(--white);
 }
 
 /* modal */

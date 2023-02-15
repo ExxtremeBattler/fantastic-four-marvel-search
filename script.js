@@ -67,6 +67,59 @@ $(document).ready(function () {
     });
   }
 
+  // MUST READ COMICS
+  // retrieve character id from marvel API based on the search input
+  function IDfetcher(marvelCharacter) {
+    const marvelApi =
+      "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
+      marvelCharacter +
+      "&ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+
+    $.ajax({
+      url: marvelApi,
+      method: "GET",
+    }).then(function (response) {
+      const id = response.data.results[0].id;
+
+      // initialize display comic function
+      comic(id);
+    });
+  }
+
+  function comic(id) {
+    const marvelapi =
+      "https://gateway.marvel.com:443/v1/public/characters/" +
+      id +
+      "/comics?ts=1&apikey=6f68ec270b01384876787724cd124e64&hash=701330a00b13eb2a18e31cad8b72fe5b";
+    $.ajax({
+      url: marvelapi,
+      method: "GET",
+    }).then(function (response) {
+      const comicExample = {
+        comic1: response.data.results[1].title,
+        comicLink1: response.data.results[1].urls[0].url,
+        comicBook1: response.data.results[1].thumbnail.path,
+        comic2: response.data.results[2].title,
+        comicLink1: response.data.results[2].urls[0].url,
+        comicBook2: response.data.results[2].thumbnail.path,
+        comic3: response.data.results[3].title,
+        comicLink1: response.data.results[3].urls[0].url,
+        comicBook3: response.data.results[3].thumbnail.path,
+      };
+
+      $("#comic1").text(comicExample.comic1);
+      $("#comic-link1").attr("href", comicExample.comicLink1);
+      $("#comic-book1").attr("src", comicExample.comicBook1 + ".jpg");
+
+      $("#comic2").text(comicExample.comic2);
+      $("#comic-book2").attr("src", comicExample.comicBook2 + ".jpg");
+      $("#comic3").text(comicExample.comic3);
+
+      $("#comic-book2").attr("src", comicExample.comicBook2 + ".jpg");
+      $("#comic-book3").attr("src", comicExample.comicBook3 + ".jpg");
+    });
+  }
+
   // SEARCH HISTORY
   // limits visible searches on screen
   const pastSearchesNo = 5;
@@ -111,6 +164,7 @@ $(document).ready(function () {
       lastSearch.on("click", function (event) {
         event.preventDefault();
         superhero(lastSearch.text());
+        IDfetcher(lastSearch.text());
         $("#trending").addClass("hide");
         $("#searchResult").removeClass("hide");
 
@@ -302,6 +356,8 @@ $(document).ready(function () {
       $(".modal").modal("show");
     } else {
       superhero($("#searchInput").val());
+      IDfetcher($("#searchInput").val());
+
       appendToHistory($("#searchInput").val());
       // clears search input filed
       $("#searchInput").val("");
