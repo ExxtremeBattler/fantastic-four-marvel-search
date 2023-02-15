@@ -112,11 +112,11 @@ $(document).ready(function () {
       $("#comic-book1").attr("src", comicExample.comicBook1 + ".jpg");
 
       $("#comic2").text(comicExample.comic2);
-      $("#comic-link2").attr("src", comicExample.comicLink2 + ".jpg");
+      $("#comic-link2").attr("href", comicExample.comicLink2);
       $("#comic-book2").attr("src", comicExample.comicBook2 + ".jpg");
 
       $("#comic3").text(comicExample.comic3);
-      $("#comic-link2").attr("src", comicExample.comicLink3 + ".jpg");
+      $("#comic-link3").attr("href", comicExample.comicLink3);
       $("#comic-book3").attr("src", comicExample.comicBook3 + ".jpg");
     });
   }
