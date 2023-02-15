@@ -93,7 +93,7 @@ information for them once more.
 
 The following video shows the application's appearance and functionality:
 
-MISSING
+![](./assets/Marvel%20Hero%20Search.gif)
 
 ## Credits
 
