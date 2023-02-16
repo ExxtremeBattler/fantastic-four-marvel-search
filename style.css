@@ -102,6 +102,7 @@ h4 {
   font-size: 2.4rem;
   line-height: 3.2;
   padding: 1rem;
+  margin-bottom: 1.6rem;
 }
 
 .search-btn {
@@ -118,9 +119,8 @@ h4 {
   text-align: center;
   color: var(--white);
   background-color: var(--accent);
-  margin-top: 0.8rem;
   width: 100%;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 .btn i {
@@ -254,13 +254,32 @@ h4 {
 }
 
 /* carousel */
-.carousel-inner {
-  /* margin-top: 1.2rem; */
-}
 
 .carousel-img {
-  height: 24rem;
+  height: 32rem;
   object-fit: cover;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.comic-link {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 0.2rem 2.4rem;
+  letter-spacing: 2px;
+}
+
+.comic-link i {
+  margin-right: 0.4rem;
+}
+
+.comic-link:hover {
+  color: var(--white);
 }
 
 /* modal */

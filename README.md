@@ -1,9 +1,11 @@
 # fantastic-four-marvel-search
-The Fantastic Four's first project for Module 9 of Bootcamp. 
+
+The Fantastic Four's first project for Module 9 of Bootcamp.
 
 Deployed Appliation can be found at : https://exxtremebattler.github.io/fantastic-four-marvel-search/
 
 ## Table of Contents
+
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -12,23 +14,28 @@ Deployed Appliation can be found at : https://exxtremebattler.github.io/fantasti
 
 ## Description
 
-A marvel hero search application that allows a user to search for a marvel character.
- 
+A marvel hero search application that allows a user to search for a marvel
+character.
+
 Page runs in the browser and features dynamically updated HTML and CSS.
 
-Application uses the [Marvel API](https://developer.marvel.com/) to retrieve comic and creator data for characters. 
+Application uses the [Marvel API](https://developer.marvel.com/) to retrieve
+comic and creator data for characters.
 
-You will need to register for an API key in order to use this API, with a limit of 3000 calls per day. 
+You will need to register for an API key in order to use this API, with a limit
+of 3000 calls per day.
 
-A timestamp and hash will also be required for authentication (you can find more about that [here](https://developer.marvel.com/documentation/authorization)).
+A timestamp and hash will also be required for authentication (you can find more
+about that [here](https://developer.marvel.com/documentation/authorization)).
 
-
-Application also uses the [Superhero API](https://superheroapi.com/) to work fetch nickname, full name, alignment, first appearance, and group affiliation. Be sure to read the documentation carefully! 
+Application also uses the [Superhero API](https://superheroapi.com/) to work
+fetch nickname, full name, alignment, first appearance, and group affiliation.
+Be sure to read the documentation carefully!
 
 ## Installation
 
-Add the Bootstrap library links right before your css and closing `</head>` tag in
-html files:
+Add the Bootstrap library links right before your css and closing `</head>` tag
+in html files:
 
 ```html
 <link
@@ -71,15 +78,22 @@ Your own script code:
 
 ## Usage
 
-(Note that, upon opening the website, random comic and character information will be displayed by default.)
+(Note that, upon opening the website, random comic and character information
+will be displayed by default.)
 
-To use the program, click on the search bar to enter a character of your choosing. Once entered, click 'Search'.
+To use the program, click on the search bar to enter a character of your
+choosing. Once entered, click 'Search'.
 
-The website will now display various information about said character for your viewing pleasure.
+The website will now display various information about said character for your
+viewing pleasure.
 
-The last 5 searches will be saved in a list, to the right of the search bar. Clicking any particular saved character in this list will fetch the relevant information for them once more.
+The last 5 searches will be saved in a list, to the right of the search bar.
+Clicking any particular saved character in this list will fetch the relevant
+information for them once more.
 
-(**insert demo here**)
+The following video shows the application's appearance and functionality:
+
+![](./assets/Marvel%20Hero%20Search.gif)
 
 ## Credits
 
@@ -91,5 +105,3 @@ The last 5 searches will be saved in a list, to the right of the search bar. Cli
 ## License
 
 Please refer to the LICENSE file in the repository.
-
-
