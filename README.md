@@ -4,6 +4,8 @@ The Fantastic Four's first project for Module 9 of Bootcamp.
 
 Deployed Appliation can be found at : https://exxtremebattler.github.io/fantastic-four-marvel-search/
 
+Presentation slides : https://www.canva.com/design/DAFaNLA8vVs/vaFRZIc6MP2OrdTboAWXMg/view?utm_content=DAFaNLA8vVs&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
+
 ## Table of Contents
 
 - [Description](#description)
